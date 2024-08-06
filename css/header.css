@@ -1,0 +1,158 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.page-header {
+    display: flex;
+    padding: 0 4px;
+    justify-content: space-between;
+    user-select: none;
+    height: fit-content;
+    position: relative;
+}
+
+.header-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.logo {
+    color: white;
+    align-self: center;
+    margin-left: 1.2rem;
+    font-family: "PRegular";
+    font-size: 2em;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.nav-bar a, .dropdown .dropbtn {
+    color: white;
+    margin: 1em;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: "PRegular";
+    font-size: 1em;
+}
+
+.nav-bar a.active, .dropdown .dropbtn.active {
+    color: #cbfd41;
+}
+
+.nav-bar a:hover, .dropdown .dropbtn:hover {
+    color: #a5b871;
+    transition: ease-in 0.1s;
+}
+
+.menu-icon {
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+.m-icon {
+    font-family: "MaterialOutlined";
+    font-size: 2.5rem;
+}
+
+button {
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+    padding: 0.9rem;
+    font-family: "PRegular";
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    color: white;
+    padding: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: "PRegular";
+    font-size: 1em;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+@media screen and (max-width: 700px) {
+    .nav-bar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: inherit;
+    }
+
+    .nav-bar.responsive {
+        display: block;
+        backdrop-filter: blur(5px);
+    }
+
+    .nav-bar a, .dropdown .dropbtn {
+        display: block;
+        margin: 0;
+        padding: 1em 0;
+        text-align: center;
+    }
+
+
+    .menu-icon {
+        display: block;
+        z-index: 1;
+    }
+
+    button {
+        padding: 0.4rem;
+    }
+
+    .logo {
+        font-size: 1.4em;
+    }
+
+    .dropdown-content {
+        position: relative;
+        background-color: inherit;
+        box-shadow: none;
+    }
+
+    .dropdown-content a {
+        padding: 1em 0;
+    }
+}

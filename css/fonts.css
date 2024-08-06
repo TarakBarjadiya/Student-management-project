@@ -1,0 +1,174 @@
+/* material icons */
+@font-face {
+    font-family: "MaterialOutlined";
+    src: url("../fonts/material-outlined.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "MaterialRounded";
+    src: url("../fonts/material-rounded.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "MaterialSharp";
+    src: url("../fonts/material-sharp.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+/* poppins */
+
+@font-face {
+    font-family: "PBlack";
+    src: url("../fonts/Poppins-Black.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PBold";
+    src: url("../fonts/Poppins-Bold.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PBoldI";
+    src: url("../fonts/Poppins-BoldItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PExtraBold";
+    src: url("../fonts/Poppins-ExtraBold.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PExtraBoldI";
+    src: url("../fonts/Poppins-ExtraBoldItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PExtraLight";
+    src: url("../fonts/Poppins-ExtraLight.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PExtraLightI";
+    src: url("../fonts/Poppins-ExtraLightItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PItalic";
+    src: url("../fonts/Poppins-Italic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PLight";
+    src: url("../fonts/Poppins-Light.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PLightI";
+    src: url("../fonts/Poppins-LightItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PMedium";
+    src: url("../fonts/Poppins-Medium.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PMediumI";
+    src: url("../fonts/Poppins-MediumItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PRegular";
+    src: url("../fonts/Poppins-Regular.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PSemiBold";
+    src: url("../fonts/Poppins-SemiBold.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PSemiBoldI";
+    src: url("../fonts/Poppins-SemiBoldItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PThin";
+    src: url("../fonts/Poppins-Thin.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PThinI";
+    src: url("../fonts/Poppins-ThinItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+/* Rubik */
+
+@font-face {
+    font-family: "RubikI";
+    src: url("../fonts/RubikItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "RubikReg";
+    src: url("../fonts/RubikRegular.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+/* PlayFairDisplay */
+
+@font-face {
+    font-family: "PFDI";
+    src: url("../fonts/PFDItalic.ttf");
+    font-weight: normal;
+    font-size: medium;
+}
+
+@font-face {
+    font-family: "PFDReg";
+    src: url("../fonts/PFDRegular.ttf");
+    font-weight: normal;
+    font-size: medium;
+}

@@ -1,0 +1,348 @@
+:root {
+    --white: #fff;
+    --black: #000;
+    --gray: #2b3c56;
+    --lite: #f1f1f1;
+    --dark: #1d1e22;
+
+    --yellow: #f5b409;
+    --red: #f33e5d;
+    --green: #9bd846;
+    --blue: #029ef6;
+    --orange: #ee712f;
+    --pink: #ef5890;
+
+    --primary: #5487fa;
+    --primary_dark: ;
+    --primary_lite: #e4ecfe;
+
+    --secondary: ;
+    --secondary_dark: ;
+    --secondary_lite: ;
+}
+
+.manage-class .m-icon {
+    color: white;
+}
+
+.button {
+    margin: 8px 8px 8px 0;
+    cursor: pointer;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    border-radius: 5px;
+    color: white;
+    min-width: fit-content;
+    width: 95px;
+    font-size: 14px;
+}
+
+.button:hover {
+    color: var(--primary);
+    background-color: transparent;
+}
+
+.top-links {
+    display: flex;
+    align-items: center;
+}
+
+
+.top-links a {
+    margin: 8px 8px 8px 0;
+}
+
+table {
+    margin: 10px auto;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--white);
+    border-radius: 10px;
+    position: relative;
+    border-collapse: collapse;
+    z-index: 1;
+    color: var(--gray);
+}
+
+tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba(1, 1, 1, 0.2);
+}
+
+th,
+td {
+    padding: 1rem;
+    gap: 10px;
+    position: relative;
+}
+
+td:last-child:hover a {
+    color: var(--black);
+}
+
+thead {
+    background-color: var(--primary_lite);
+    display: table-header-group;
+    user-select: none;
+}
+
+th {
+    cursor: pointer;
+    /* text-transform: uppercase; */
+}
+
+td img {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 5px;
+}
+
+tr td {
+    text-align: center;
+}
+
+tr:hover {
+    background-color: #e4e4e4;
+}
+
+th:hover {
+    background-color: var(--primary_lite);
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+    max-width: 400px;
+    text-align: center;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.confirm-btn,
+.cancel-btn {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.confirm-btn {
+    background-color: red;
+    border: 1px solid red;
+    color: white;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    color: #ff0000;
+    background-color: transparent;
+    border: 1px solid red;
+}
+
+.cancel-btn {
+    background-color: #adadad;
+    border: 1px solid #adadad;
+    color: #161616;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    color: #161616;
+    background-color: transparent;
+    border: 1px solid #adadad;
+}
+
+
+/* td:last-child:hover:after {
+    content: "Project";
+    position: absolute;
+    width: fit-content;
+    left: -10%;
+    top: -40%;
+    transform: translate(0%, 50%);
+    font-size: 12px;
+    color: var(--lite);
+    background-color: var(--dark);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 5px;
+    padding: 2px 4px;
+    z-index: 9;
+} */
+
+table a {
+    color: var(--gray);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: small;
+}
+
+.pagination button{
+    margin: 0 5px;
+    background-color: transparent;
+    border: none;
+    color: #029ef6;
+}
+
+.pagination .page-btn{
+    cursor: pointer;
+}
+
+.pagination .m-icon {
+    border: none;
+    font-size: 1.15em;
+    color: #029ef6;
+}
+
+.pagination .m-icon:hover {
+    color: #108ce7;
+}
+.page-btn.active{
+    color: #314f9f;
+}
+.pagination button:disabled .m-icon {
+    color: #9bc3da;
+    cursor: not-allowed;
+}
+
+.edit-link {
+    font-size: small;
+    text-align: center;
+}
+
+.edit-link:hover {
+    color: rgb(20, 65, 211) !important;
+}
+
+.delete-btn {
+    border: none;
+    background: none;
+    font-family: 'PRegular';
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    color: red;
+}
+
+/* Basic responsive styles for small screens */
+@media (max-width: 781px) {
+    table {
+        font-size: 1.1rem;
+        width: 100%;
+        border-spacing: 0;
+    }
+
+    thead tr {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    tbody {
+        display: block;
+    }
+
+    tr {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid rgba(1, 1, 1, 0.2);
+    }
+
+    td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        position: relative;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(1, 1, 1, 0.2);
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: var(--primary);
+    }
+
+    /* Apply alternating colors to tbody rows starting from the second row */
+    tbody tr:nth-child(2n) {
+        background-color: #f9f9f9;
+        /* Light color for even rows (starting from second row) */
+    }
+
+    tbody tr:nth-child(2n+1) {
+        background-color: #e4e4e4;
+        /* Slightly darker color for odd rows (starting from the first row) */
+    }
+
+    td:last-child {
+        border-bottom: none;
+    }
+}
+
+@media screen and (max-width:400px) {
+    table {
+        font-size: 0.8em;
+    }
+
+    thead {
+        display: none;
+    }
+}
