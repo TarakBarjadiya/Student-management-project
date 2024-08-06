@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
 // Fetch classes based on selected type
 if (isset($_GET['class_type'])) {
     $classType = $_GET['class_type'];
-    $sql = "SELECT id, class_name, batch_year FROM classes WHERE class_type = ?";
+    $sql = "SELECT id, class_name, batch_year, class_fees FROM classes WHERE class_type = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $classType);
     $stmt->execute();
@@ -93,6 +93,11 @@ $conn->close();
                 <option value="">Select Class Name</option>
                 <!-- Options populated via JavaScript -->
             </select>
+        </div>
+
+        <div class="nice-form-group">
+            <label for="class_fees">Class Fees/Semester (6 months):</label>
+            <input type="text" id="class_fees" name="class_fees" placeholder="class fees" readonly required >
         </div>
 
         <!-- ---------------------- Personal Details ------------------------- -->

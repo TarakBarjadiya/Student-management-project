@@ -42,6 +42,15 @@ $motherContact = trim($_POST['mother_contact'] ?? '');
 // Format address
 $address = $house_no . ', ' . $address_2 . ', ' . $address_3 . ', ' . $city . ', ' . $state . ' - ' . $postal_code;
 
+// Fetch the class fees for the selected class
+$sql = "SELECT class_fees FROM classes WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $classId);
+$stmt->execute();
+$stmt->bind_result($classFees);
+$stmt->fetch();
+$stmt->close();
+
 // Update student information in the database
 $sql = "
     UPDATE student_info
@@ -63,13 +72,14 @@ $sql = "
         father_name = ?,
         father_contact = ?,
         mother_name = ?,
-        mother_contact = ?
+        mother_contact = ?,
+        fees_pending = ?
     WHERE id = ?
 ";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param(
-    'issssssssssssssssssi',
+    'issssssssssssssssssii',
     $classId,
     $firstName,
     $middleName,
@@ -89,6 +99,7 @@ $stmt->bind_param(
     $fatherContact,
     $motherName,
     $motherContact,
+    $classFees,
     $student_id
 );
 
@@ -102,6 +113,6 @@ $stmt->close();
 $conn->close();
 
 // Redirect back to the edit page with a message
-header("Location: editStudent.php?id=$student_id");
+header("Location: manageStudents.php");
 exit();
 ?>

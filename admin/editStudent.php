@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
 // Fetch classes based on selected type for AJAX requests
 if (isset($_GET['class_type'])) {
     $classType = $_GET['class_type'];
-    $sql = "SELECT id, class_name, batch_year FROM classes WHERE class_type = ?";
+    $sql = "SELECT id, class_name, batch_year, class_fees FROM classes WHERE class_type = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $classType);
     $stmt->execute();
@@ -260,10 +260,14 @@ $conn->close();
             <input type="text" id="mother_contact" name="mother_contact" value="<?php echo htmlspecialchars($student['mother_contact']); ?>" required>
         </div>
 
-        <button type="submit" class="save-button">Save Changes</button>
+        <button type="submit" class="input-button">Save Changes</button>
+        <button type="button" class="input-button" onclick="handleBack()">Back</button>
     </form>
 
     <script>
+        function handleBack(){
+            window.location.href = 'manageStudents.php';
+        }
         function updateClasses() {
             const classType = document.getElementById('class_type').value;
             const classNameSelect = document.getElementById('class_name');
@@ -276,7 +280,7 @@ $conn->close();
                         data.forEach(classItem => {
                             const option = document.createElement('option');
                             option.value = classItem.id;
-                            option.textContent = `${classItem.class_name} (${classItem.batch_year})`;
+                            option.textContent = `${classItem.class_name} (${classItem.batch_year}) (₹ ${classItem.class_fees}/-)`;
                             classNameSelect.appendChild(option);
                         });
                         // Set the selected class name if available
@@ -290,6 +294,7 @@ $conn->close();
             }
         }
         updateClasses();
+
         document.addEventListener("DOMContentLoaded", function() {
             // Populate states dropdown and set previously selected state
             print_state();

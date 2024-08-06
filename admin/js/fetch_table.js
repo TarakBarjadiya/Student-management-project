@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     class_name: 'Class Name',
     batch_year: 'Batch Year',
     creation_date: 'Creation Date',
-    modification_date: 'Last Edit',
+    class_fees: 'Class Fees',
   };
 
   let tableData = [];
@@ -155,8 +155,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function sortTable(column, order) {
     filteredData.sort((a, b) => {
-      if (a[column] < b[column]) return order === 'asc' ? -1 : 1;
-      if (a[column] > b[column]) return order === 'asc' ? 1 : -1;
+      let valA = a[column];
+      let valB = b[column];
+
+      // Check if the column is class_fees and convert to numbers for sorting
+      if (column === 'class_fees') {
+        valA = parseInt(valA);
+        valB = parseInt(valB);
+      }
+
+      if (valA < valB) return order === 'asc' ? -1 : 1;
+      if (valA > valB) return order === 'asc' ? 1 : -1;
       return 0;
     });
     renderTable(filteredData, columnNames, currentPage);

@@ -13,7 +13,7 @@ if (!$table || !$id) {
 $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
 
 // Fetch the record by ID
-$query = $conn->prepare("SELECT class_name, class_type, batch_year FROM $table WHERE id = ?");
+$query = $conn->prepare("SELECT class_name, class_type, batch_year, class_fees FROM $table WHERE id = ?");
 $query->bind_param('i', $id);
 $query->execute();
 $result = $query->get_result();
@@ -26,16 +26,18 @@ if (!$row) {
 $classType = $row['class_type'];
 $className = $row['class_name'];
 $batchYear = $row['batch_year'];
+$classFees = $row['class_fees'];
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $class_name = $_POST['class_type'] === 'other' ? $_POST['other_class_name'] : $_POST['class_name'];
+    $class_name = $_POST['class_type'] === 'Other' ? $_POST['other_class_name'] : $_POST['class_name'];
     $class_type = $_POST['class_type'];
     $batch_year = $_POST['batch_year'];
+    $class_fees = $_POST['class_fees'];
 
-    $updateQuery = "UPDATE $table SET class_name = ?, class_type = ?, batch_year = ? WHERE id = ?";
+    $updateQuery = "UPDATE $table SET class_name = ?, class_type = ?, batch_year = ?, class_fees = ? WHERE id = ?";
     $stmt = $conn->prepare($updateQuery);
-    $stmt->bind_param('ssii', $class_name, $class_type, $batch_year, $id);
+    $stmt->bind_param('ssiii', $class_name, $class_type, $batch_year, $class_fees, $id);
 
     if ($stmt->execute()) {
         echo "<script>alert('Class Details Edited Successfully!!'); window.location.href = 'manageClass.php';</script>";
@@ -155,6 +157,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 ?>
             </select>
+        </div>
+
+        <!-- class fees -->
+        <div class="nice-form-group">
+            <label for="class_fees">Class Fees/Semester(6 months)</label>
+            <input type="number" name="class_fees" id="class_fees" value="<?php echo htmlspecialchars($classFees); ?>" required>
         </div>
 
         <div class="submit-cancel">

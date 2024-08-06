@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $class_type = $_POST['class_type'];
     $class_name = $class_type === 'other' ? $_POST['other_class_name'] : $_POST['class_name'];
     $batch_year = $_POST['batch_year'];
+    $class_fess = $_POST['class_fees'];
 
     // Check for duplicate entry
     $check_sql = "SELECT * FROM classes WHERE class_type = ? AND class_name = ? AND batch_year = ?";
@@ -28,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Duplicate entry found. The class already exists.'); window.location.href = 'addClass.php';</script>";
     } else {
         // Insert the new record
-        $sql = "INSERT INTO classes (class_type, class_name, batch_year) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO classes (class_type, class_name, batch_year, class_fees) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $class_type, $class_name, $batch_year);
+        $stmt->bind_param("sssi", $class_type, $class_name, $batch_year, $class_fess);
 
         if ($stmt->execute()) {
             echo "<script>alert('Class Added Successfully!!'); window.location.href = 'addClass.php';</script>";
@@ -89,6 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 ?>
             </select>
+        </div>
+        <!-- class_fees  -->
+        <div class="nice-form-group" id="batch-year">
+            <label for="batch-year">Class Fees/Semester(6 months)</label>
+            <input type="number" name="class_fees" id="class_fees" required placeholder="fees of 6 months">
         </div>
 
         <input class="input-button" type="submit" value="Add Class">

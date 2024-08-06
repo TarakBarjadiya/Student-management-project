@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mobile = trim($_POST['mobile']);
     $fatherContact = trim($_POST['father_contact']);
     $motherContact = trim($_POST['mother_contact']);
+    $classFees = $_POST['class_fees'];
 
     // Check for duplicate email
     $sql = "SELECT COUNT(*) FROM student_info WHERE stud_email = ?";
@@ -64,9 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $enrollmentNumber = generateEnrollmentNumber($conn);
         // Prepare SQL statement to insert student information
-        $sql = "INSERT INTO student_info (enrollment_number, class_id, first_name, middle_name, last_name, gender, stud_dob, stud_address, house_no, address_2, address_3, state, city, postal_code, stud_mobile, stud_email, father_name, father_contact, mother_name, mother_contact) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO student_info (enrollment_number, class_id, first_name, middle_name, last_name, gender, stud_dob, stud_address, house_no, address_2, address_3, state, city, postal_code, stud_mobile, stud_email, father_name, father_contact, mother_name, mother_contact, fees_pending) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sissssssssssssssssss", $enrollmentNumber, $classId, $firstName, $middleName, $lastName, $gender, $dob, $address, $house_no, $address_2, $address_3, $state, $city, $postal_code, $mobile, $email, $fatherName, $fatherContact, $motherName, $motherContact);
+        $stmt->bind_param("sissssssssssssssssssi", $enrollmentNumber, $classId, $firstName, $middleName, $lastName, $gender, $dob, $address, $house_no, $address_2, $address_3, $state, $city, $postal_code, $mobile, $email, $fatherName, $fatherContact, $motherName, $motherContact, $classFees);
 
         if ($stmt->execute()) {
             echo "<script>alert('Student Added Successfully!!'); window.location.href = 'addStudent.php';</script>";
