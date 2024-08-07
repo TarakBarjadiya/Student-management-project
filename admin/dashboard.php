@@ -68,6 +68,7 @@ $conn->close();
         <div class="overviewcard__icon">Remaining Fees</div>
         <div class="overviewcard__info">{amount}</div>
     </div>
+    <a href="./includes/resetFees.php">Reset Fees</a>
 </div>
 <!--End Main Overview-->
 <!-- <script src="./js/dashboard.js"></script> -->

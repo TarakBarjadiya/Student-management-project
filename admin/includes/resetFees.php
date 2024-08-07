@@ -25,6 +25,6 @@ while ($student = mysqli_fetch_assoc($students)) {
     }
 }
 
-echo "Monthly fees update completed successfully.";
+echo "<script>alert('Fees Added Successfully!!'); window.location.href = '../fees.php';</script>";
 mysqli_close($conn);
 ?>
