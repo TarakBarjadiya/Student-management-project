@@ -1,0 +1,104 @@
+<?php
+include './includes/dbconnection.php'; // Database connection
+
+// Initialize variables
+$student_id = $paid_amount = $fees_pending = $fees_paid = '';
+
+if (isset($_GET['id'])) {
+    $student_id = $_GET['id'];
+
+    // Fetch student and class details
+    $query = "
+        SELECT si.id, si.enrollment_number, si.first_name, si.middle_name, si.last_name, si.fees_pending, si.fees_paid, c.class_name 
+        FROM student_info si
+        JOIN classes c ON si.class_id = c.id
+        WHERE si.id = '$student_id'
+    ";
+    $result = mysqli_query($conn, $query);
+    $student = mysqli_fetch_assoc($result);
+
+    if (!$student) {
+        echo "Student not found.";
+        exit;
+    }
+}
+
+// Check if the request is a POST request
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $student_id = $_POST['student_id'];
+    $paid_amount = $_POST['paid_amount'];
+    $paid_date = date('Y-m-d');
+
+    // Fetch current fees details
+    $result = mysqli_query($conn, "SELECT fees_pending, fees_paid FROM student_info WHERE id = '$student_id'");
+    $row = mysqli_fetch_assoc($result);
+
+    if ($row) {
+        $fees_pending = $row['fees_pending'];
+        $fees_paid = $row['fees_paid'];
+
+        // Update fees
+        $new_fees_pending = max(0, $fees_pending - $paid_amount);
+        $new_fees_paid = $fees_paid + $paid_amount;
+
+        $sql = "UPDATE student_info SET fees_pending = '$new_fees_pending', fees_paid = '$new_fees_paid', paid_date = '$paid_date' WHERE id = '$student_id'";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('Updated Fees Successfully!!'); window.location.href = 'fees.php';</script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    } else {
+        echo "Student not found.";
+    }
+
+    mysqli_close($conn);
+}
+?>
+
+
+<?php include "./includes/sidebar.php" ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Fees</title>
+</head>
+
+<body>
+    <h1>Edit Fees</h1>
+    <form action="editFees.php?id=<?php echo htmlspecialchars($student_id); ?>" method="post">
+        <input type="hidden" id="student_id" name="student_id" value="<?php echo htmlspecialchars($student['id']); ?>">
+
+        <label for="enrollment_number">Enrollment Number:</label>
+        <input type="text" id="enrollment_number" name="enrollment_number" value="<?php echo htmlspecialchars($student['enrollment_number']); ?>" readonly><br>
+
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($student['first_name']); ?>" readonly><br>
+
+        <label for="middle_name">Middle Name:</label>
+        <input type="text" id="middle_name" name="middle_name" value="<?php echo htmlspecialchars($student['middle_name']); ?>" readonly><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($student['last_name']); ?>" readonly><br>
+
+        <label for="class_name">Class Name:</label>
+        <input type="text" id="class_name" name="class_name" value="<?php echo htmlspecialchars($student['class_name']); ?>" readonly><br>
+        <label for="student_id">Student ID:</label>
+        <input type="text" id="student_id" name="student_id" value="<?php echo htmlspecialchars($student_id); ?>" readonly><br>
+
+        <label for="current_fees_pending">Current Fees Pending:</label>
+        <input type="text" id="current_fees_pending" name="current_fees_pending" value="<?php echo htmlspecialchars($student['fees_pending']); ?>" readonly><br>
+
+        <label for="paid_amount">Paid Amount:</label>
+        <input type="text" id="paid_amount" name="paid_amount" required><br>
+
+
+        <input type="submit" value="Update Payment">
+        <input type="button" value="Back" onclick="window.location.href = 'fees.php';">
+    </form>
+</body>
+
+</html>

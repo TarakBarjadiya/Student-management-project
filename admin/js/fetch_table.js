@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', function () {
     batch_year: 'Batch Year',
     creation_date: 'Creation Date',
     class_fees: 'Class Fees',
+
+    enrollment_number: 'Enroll. No.',
+    full_name: 'Full Name',
+    fees_pending: 'Fees Pending',
+    fees_paid: 'Fees Paid',
   };
 
   let tableData = [];
@@ -34,17 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
   );
 
   const tableName = tableContainer.getAttribute('data-table-name');
-  const columns = tableContainer.getAttribute('data-columns');
-
-  const deleteModal = document.getElementById('deleteModal');
-  const closeModal = document.querySelector('.close');
-  const confirmDeleteButton = document.getElementById('confirmDelete');
-  const cancelDeleteButton = document.getElementById('cancelDelete');
-
-  if (!tableName || !columns) {
-    console.error('Table name or columns not specified');
-    return;
-  }
+  let columns = tableContainer.getAttribute('data-columns');
 
   fetch('./includes/fetch_data.php', {
     method: 'POST',
@@ -86,12 +81,21 @@ document.addEventListener('DOMContentLoaded', function () {
       columnNames.forEach((col) => {
         tableHtml += `<td>${row[col]}</td>`;
       });
-      tableHtml += `
-        <td>
-          <a href="editClass.php?id=${row.id}&table=${tableName}" class="edit-link">Edit</a>
-          <button class="delete-btn" data-id="${row.id}" data-table="${tableName}">Delete</button>
-        </td>`;
-      tableHtml += '</tr>';
+      if (tableName === 'classes') {
+        tableHtml += `
+          <td>
+            <a href="editClass.php?id=${row.id}&table=${tableName}" class="edit-link">Edit</a>
+            <button class="delete-btn" data-id="${row.id}" data-table="${tableName}">Delete</button>
+          </td>`;
+        tableHtml += '</tr>';
+      }
+      if (tableName === 'student_info') {
+        tableHtml += `
+          <td>
+            <a href="editFees.php?id=${row.id}&table=${tableName}" class="edit-link">Edit</a>
+          </td>`;
+        tableHtml += '</tr>';
+      }
     });
 
     tableHtml += '</tbody></table>';
@@ -196,63 +200,74 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePaginationControls(filteredData);
   }
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   function addDeleteEventListeners() {
     const deleteButtons = document.querySelectorAll('.delete-btn');
     deleteButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        deleteId = button.getAttribute('data-id');
-        deleteTable = button.getAttribute('data-table');
-        openDeleteModal();
+        const id = event.target.dataset.id;
+        const table = event.target.dataset.table;
+        deleteId = id;
+        deleteTable = table;
+
+        // Show the modal
+        const deleteModal = document.getElementById('delete-modal');
+        deleteModal.style.display = 'block';
+
+        // Add event listener for confirm delete button
+        const confirmDeleteButton = document.getElementById('confirm-delete');
+        confirmDeleteButton.addEventListener('click', deleteRecord);
       });
     });
   }
 
-  function openDeleteModal() {
-    deleteModal.style.display = 'block';
-  }
-
-  function closeDeleteModal() {
-    deleteModal.style.display = 'none';
-  }
-
-  closeModal.addEventListener('click', closeDeleteModal);
-  cancelDeleteButton.addEventListener('click', closeDeleteModal);
-  window.addEventListener('click', (event) => {
-    if (event.target == deleteModal) {
-      closeDeleteModal();
-    }
-  });
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeDeleteModal();
-    }
-  });
-
-  confirmDeleteButton.addEventListener('click', () => {
-    deleteRow(deleteId, deleteTable);
-    closeDeleteModal();
-  });
-
-  function deleteRow(id, table) {
-    fetch(`delete_row.php?id=${id}&table=${table}`)
+  function deleteRecord() {
+    fetch('./includes/delete.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        id: deleteId,
+        table: deleteTable,
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          location.reload();
-        } else {
-          alert(`Error deleting row: ${data.error}`);
+        if (data.error) {
+          console.error(data.error);
+          return;
         }
+
+        // Hide the modal
+        const deleteModal = document.getElementById('delete-modal');
+        deleteModal.style.display = 'none';
+
+        // Remove the deleted record from tableData and filteredData
+        tableData = tableData.filter((row) => row.id !== deleteId);
+        filteredData = filteredData.filter((row) => row.id !== deleteId);
+
+        // Re-render the table
+        renderTable(filteredData, columnNames, currentPage);
+        updatePaginationControls(filteredData);
       })
-      .catch((error) => console.error('Error deleting row:', error));
+      .catch((error) => console.error('Error deleting record:', error));
   }
 
   function addPaginationEventListeners() {
-    const pageButtons = document.querySelectorAll('.page-btn');
-    pageButtons.forEach((button) => {
+    const pageButtonsTop = document.querySelectorAll(
+      '#page-buttons-top .page-btn',
+    );
+    const pageButtonsBottom = document.querySelectorAll(
+      '#page-buttons-bottom .page-btn',
+    );
+
+    pageButtonsTop.forEach((button) => {
+      button.addEventListener('click', () => {
+        currentPage = parseInt(button.dataset.page);
+        renderTable(filteredData, columnNames, currentPage);
+        updatePaginationControls(filteredData);
+      });
+    });
+
+    pageButtonsBottom.forEach((button) => {
       button.addEventListener('click', () => {
         currentPage = parseInt(button.dataset.page);
         renderTable(filteredData, columnNames, currentPage);
@@ -293,6 +308,10 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePaginationControls(filteredData);
       }
     });
+  }
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   exportCSVButton.addEventListener('click', () => {

@@ -11,9 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return mysqli_real_escape_string($conn, $col);
     }, $columns);
 
-    // Construct the SQL query
-    $columnsList = implode(', ', $columns);
-    $query = "SELECT $columnsList FROM $tableName";
+    // If the table is student_info, include class_name from classes table
+    if ($tableName === 'student_info') {
+        $columns[] = 'class_name';
+        $columnsList = implode(', ', $columns);
+        $query = "SELECT student_info.id, student_info.enrollment_number, CONCAT(student_info.first_name, ' ', student_info.middle_name, ' ', student_info.last_name) AS full_name, student_info.fees_pending, student_info.fees_paid, CONCAT(classes.class_name ,' (',classes.batch_year,')') as class_name
+                  FROM student_info 
+                  JOIN classes ON student_info.class_id = classes.id";
+    } else {
+        $columnsList = implode(', ', $columns);
+        $query = "SELECT $columnsList FROM $tableName";
+    }
 
     $result = mysqli_query($conn, $query);
 

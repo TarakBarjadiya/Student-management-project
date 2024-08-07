@@ -25,6 +25,10 @@
     color: white;
 }
 
+.header-small {
+    display: block;
+}
+
 .button {
     margin: 8px 8px 8px 0;
     cursor: pointer;
@@ -230,14 +234,14 @@ table a {
     font-size: small;
 }
 
-.pagination button{
+.pagination button {
     margin: 0 5px;
     background-color: transparent;
     border: none;
     color: #029ef6;
 }
 
-.pagination .page-btn{
+.pagination .page-btn {
     cursor: pointer;
 }
 
@@ -250,9 +254,11 @@ table a {
 .pagination .m-icon:hover {
     color: #108ce7;
 }
-.page-btn.active{
+
+.page-btn.active {
     color: #314f9f;
 }
+
 .pagination button:disabled .m-icon {
     color: #9bc3da;
     cursor: not-allowed;
@@ -280,10 +286,12 @@ table a {
 
 /* Basic responsive styles for small screens */
 @media (max-width: 781px) {
+
     table {
         font-size: 1.1rem;
         width: 100%;
         border-spacing: 0;
+        overflow-x: auto !important;
     }
 
     thead tr {
@@ -338,6 +346,10 @@ table a {
 }
 
 @media screen and (max-width:400px) {
+    .header-small {
+        display: none;
+    }
+
     table {
         font-size: 0.8em;
     }
