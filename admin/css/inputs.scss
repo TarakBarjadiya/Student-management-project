@@ -1,11 +1,17 @@
+.input-button-container{
+  display: flex;
+}
+
 .input-button {
   box-sizing: border-box;
   margin-top: 24px;
+  margin-right: 5px;
   padding: 10px;
   font-size: 0.9em;
   cursor: pointer;
   background-color: #3b4ce2;
   border: 1px solid #3b4ce2;
+  font-family: inherit;
   border-radius: 5px;
   color: #ffffff;
 }

@@ -36,7 +36,7 @@ a {
 
 .dashboard-content h2 {
     font-weight: 600;
-    margin: 20px 0 ;
+    margin: 20px 0;
 }
 
 body {
@@ -267,6 +267,25 @@ h1 {
     font-family: "MaterialOutlined";
     font-size: 1.5em;
     /* margin-right: 10px; */
+}
+
+.back-container a {
+    background-color: #d8d8d8;
+    border: 2px solid #71a2f5;
+    border-radius: 15px;
+    height: fit-content;
+    width: fit-content;
+}
+
+.m-icon.blue {
+    color: #71a2f5 !important;
+}
+
+.back-container a:hover {
+    border-color: #0458eb;
+    .m-icon.blue {
+        color: #0458eb !important;
+    }
 }
 
 .menu-toggle:hover {

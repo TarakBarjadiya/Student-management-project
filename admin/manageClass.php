@@ -43,12 +43,12 @@
 
     </section>
     <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="modal">
+    <div id="delete-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Are you sure you want to delete this class?</p>
-            <button id="confirmDelete" class="confirm-btn">Delete</button>
-            <button id="cancelDelete" class="cancel-btn">Cancel</button>
+            <button id="confirm-delete" class="confirm-btn">Delete</button>
+            <button id="cancel-delete" class="cancel-btn">Cancel</button>
         </div>
     </div>
     <script defer src="./js/fetch_table.js"></script>
