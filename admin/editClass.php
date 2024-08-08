@@ -35,14 +35,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $batch_year = $_POST['batch_year'];
     $class_fees = $_POST['class_fees'];
 
+    // Update the class details
     $updateQuery = "UPDATE $table SET class_name = ?, class_type = ?, batch_year = ?, class_fees = ? WHERE id = ?";
     $stmt = $conn->prepare($updateQuery);
     $stmt->bind_param('ssiii', $class_name, $class_type, $batch_year, $class_fees, $id);
 
     if ($stmt->execute()) {
+        // Recalculate fees_pending for each student
+        $updateStudentFeesQuery = "
+            UPDATE student_info 
+            SET fees_pending = ? - fees_paid 
+            WHERE class_id = ?";
+        $stmtStudent = $conn->prepare($updateStudentFeesQuery);
+        $stmtStudent->bind_param('ii', $class_fees, $id);
+        $stmtStudent->execute();
+
         echo "<script>alert('Class Details Edited Successfully!!'); window.location.href = 'manageClass.php';</script>";
     } else {
-        echo "<script>alert('Error: " . $stmt->error . "'); window.location.href = 'editClass.php';</script>";
+        echo "<script>alert('Error: " . $stmt->error . "'); window.location.href = 'editClass.php?id=$id&table=$table';</script>";
     }
 }
 ?>

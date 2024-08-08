@@ -42,6 +42,15 @@ $motherContact = trim($_POST['mother_contact'] ?? '');
 // Format address
 $address = $house_no . ', ' . $address_2 . ', ' . $address_3 . ', ' . $city . ', ' . $state . ' - ' . $postal_code;
 
+// Fetch the original class ID, fees pending, and amount paid from the database
+$sql = "SELECT class_id, fees_pending, fees_paid FROM student_info WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $student_id);
+$stmt->execute();
+$stmt->bind_result($originalClassId, $originalFeesPending, $amountPaid);
+$stmt->fetch();
+$stmt->close();
+
 // Fetch the class fees for the selected class
 $sql = "SELECT class_fees FROM classes WHERE id = ?";
 $stmt = $conn->prepare($sql);
@@ -50,6 +59,17 @@ $stmt->execute();
 $stmt->bind_result($classFees);
 $stmt->fetch();
 $stmt->close();
+
+// Determine the new fees pending value
+if ($originalClassId != $classId) {
+    // If the class has changed, calculate the new fees pending
+    $feesPending = $classFees - $amountPaid;
+    // Ensure feesPending is not less than 0
+    $feesPending = max($feesPending, 0);
+} else {
+    // If the class has not changed, keep the original fees pending
+    $feesPending = $originalFeesPending;
+}
 
 // Update student information in the database
 $sql = "
@@ -99,7 +119,7 @@ $stmt->bind_param(
     $fatherContact,
     $motherName,
     $motherContact,
-    $classFees,
+    $feesPending,
     $student_id
 );
 
