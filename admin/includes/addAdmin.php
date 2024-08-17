@@ -1,7 +1,7 @@
 <?php
 include './dbconnection.php';
 
-$name = 'admin';
+$name = 'Admin';
 $email = 'admin@login.com';
 $password = 'Admin@Login';
 

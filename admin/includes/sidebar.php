@@ -1,3 +1,6 @@
+<?php include "./includes/dbconnection.php" ?>
+<?php include "./includes/getSession.php" ?>
+
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
@@ -109,14 +112,26 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
 
             <!-- requests menu -->
-            <a href="./requests.php" class="dashboard-nav-item <?php echo $current_page == 'requests.php' ? 'active' : ''; ?>">
-                <span class="nav-m-icon">pending</span>
-                <span>Requests</span>
-            </a>
+            <div class='dashboard-nav-dropdown'>
+                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['requests_pending.php', 'requests_arch.php']) ? 'active' : ''; ?>">
+                    <span class="nav-m-icon">hourglass</span>
+                    <span>Requests</span>
+                </a>
+                <div class='dashboard-nav-dropdown-menu'>
+                    <a href="./requests_pending.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'requests_pending.php' ? 'active' : ''; ?>">
+                        <span class="nav-m-icon">hourglass_top</span>
+                        <span>Pending</span>
+                    </a>
+                    <a href="./requests_arch.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'requests_arch.php' ? 'active' : ''; ?>">
+                        <span class="nav-m-icon">hourglass_bottom</span>
+                        <span>Completed</span>
+                    </a>
+                </div>
+            </div>
 
             <!-- logout menu -->
             <div class="nav-item-divider"></div>
-            <a href="./index.php" class="dashboard-nav-item">
+            <a href="./logout.php" class="dashboard-nav-item">
                 <span class="nav-m-icon">logout</span>
                 <span>Logout</span>
             </a>
@@ -131,9 +146,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="#!" class="menu-toggle">
                 <span class="m-icon">menu</span>
             </a>
-            <a href="./myProfile.php">
-                <span class="m-icon">account_circle</span>
-            </a>
+            <div style="display: flex; align-items: center;">
+                <div style="margin-right: 5px;">Logged in as <?php echo htmlspecialchars($username); ?>  (Admin)</div>
+                <a href="./myProfile.php">
+                    <span class="m-icon">account_circle</span>
+                </a>
+            </div>
         </header>
         <!-- sidebar javascript -->
         <script src="./js/sidebar.js"></script>

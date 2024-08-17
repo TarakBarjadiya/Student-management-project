@@ -1,3 +1,5 @@
+<?php include "./includes/dbconnection.php" ?>
+
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";

@@ -1,0 +1,61 @@
+1.notifications
+	this notices(notifications) should last long until over_date is gone but shouldnt be deleted from database
+	view students record, like fees.php
+	send specific student notice(s)(notification(s))
+	also view records if there are any previous notification(s) with date when sent to the student
+	also edit and delete notifications
+	student can only read the notification on their dashboard
+	admin can also view archived notifications
+
+	Structure could be :
+		notification_id
+		student_id
+		notification_title
+		notification_description
+		start_date
+		over_date
+		status: pending, live, archived(completed)
+	
+
+2.class notice
+	this notices(notifications) should last long until over_date is gone but shouldnt be deleted from database
+	view records of class notices if any are currently with there class information
+	admin rights are necessary for add,delete,edit
+	only students of that class should be able to see those notices
+	admin can also view archived class_notices
+	Structure could be :
+		c_notice_id
+		class_id
+		c_notice_title
+		c_notice_description
+		start_date
+		over_date
+		status: pending, live, archived(completed)
+	 
+3. public notice
+	this notices(notifications) should last long until over_date is gone but shouldnt be deleted from database
+	should be shown on every student dashboard and also home page of the website for public which are not student
+	admin rights are necessary for add,delete,edit
+	admin can also view archived class_notices
+	Structure could be :
+		p_notice_id
+		p_notice_title
+		p_notice_description
+		start_date
+		over_date
+		status: pending, live, archived(completed)
+
+4.requests
+	shows requests sent by student to the admin for any requests
+	admin sees request title and which student send this and later if opened can view description
+	there shouldn't time limit for this like other 3(means it shouldn't be archived after specific time or date)
+	they should apply below logic:
+	there are 2 status for each request: pending, completed
+	(which are set by admin) which are shown on different pages requests_pending.php and requests_arch.php
+	current status should be visible to student who send it
+	Structure could be :
+		request_id
+		request_title
+		request_description
+		request_date
+		status: pending, completed

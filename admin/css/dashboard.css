@@ -50,11 +50,12 @@
     user-select: none;
     box-shadow: 1px #1F5C65;
     color: white;
+    background-color: #161518;
     /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.g-student {
+/* .g-student {
     background-color: #1F5C65;
 }
 
@@ -69,6 +70,10 @@
 .g-cfees {
     background-color: #47A025;
 }
+
+.g-sfees {
+    background-color: #1c6ec7;
+} */
 
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {

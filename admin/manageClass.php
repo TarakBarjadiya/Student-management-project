@@ -7,7 +7,6 @@
     <title>Manage Class</title>
     <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/table.css">
-    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 </head>
 
 <body>

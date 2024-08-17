@@ -1,21 +1,4 @@
 <?php include "./includes/dbconnection.php" ?>
-<?php
-session_start();
-if (!isset($_SESSION['id'])) {
-    // Redirect to login page if not logged in
-    header("Location: login.php");
-    exit();
-}
-$userId = $_SESSION['id'];
-
-$sql = "SELECT admin_name FROM admins WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$stmt->bind_result($username);
-$stmt->fetch();
-$stmt->close();
-?>
 
 <?php include "./includes/sidebar.php" ?>
 <?php
@@ -38,17 +21,34 @@ if ($result) {
 } else {
     $error_message = $conn->error;
 }
+
+// Query for total pending fees amount
+$total_fees_query = "SELECT SUM(fees_pending) AS total_fees_pending FROM student_info WHERE fees_pending > 0";
+$result = $conn->query($total_fees_query);
+$total_fees_pending = 0;
+if ($result) {
+    $row = $result->fetch_assoc();
+    $total_fees_pending = $row['total_fees_pending'];
+} else {
+    $error_message = $conn->error;
+}
+
+// Query for the number of students with pending fees
+$pending_students_query = "SELECT COUNT(*) AS pending_students FROM student_info WHERE fees_pending > 0";
+$result = $conn->query($pending_students_query);
+$pending_students = 0;
+if ($result) {
+    $row = $result->fetch_assoc();
+    $pending_students = $row['pending_students'];
+} else {
+    $error_message = $conn->error;
+}
+
 $conn->close();
 ?>
 
 <link rel="stylesheet" href="./css/dashboard.css">
 <link rel="stylesheet" href="./css/cards.css">
-<!-- <main class="main"> -->
-
-<div class="main-header">
-    <div class="main-header__heading">Hello , <?php echo htmlspecialchars($username); ?></div>
-    <!-- <div class="main-header__updates" id="clock"></div> -->
-</div> <!--End Main Header-->
 
 <!--Begin Main Overview-->
 <div class="main-overview">
@@ -66,9 +66,11 @@ $conn->close();
     </div>
     <div class="overviewcard g-cfees">
         <div class="overviewcard__icon">Remaining Fees</div>
-        <div class="overviewcard__info">{amount}</div>
+        <div class="overviewcard__info"><?php echo htmlspecialchars($total_fees_pending); ?></div>
+    </div>
+    <div class="overviewcard g-sfees">
+        <div class="overviewcard__icon">Students with Pending Fees</div>
+        <div class="overviewcard__info"><?php echo htmlspecialchars($pending_students); ?></div>
     </div>
 </div>
 <a href="./includes/resetFees.php">Reset Fees</a>
-<!--End Main Overview-->
-<!-- <script src="./js/dashboard.js"></script> -->

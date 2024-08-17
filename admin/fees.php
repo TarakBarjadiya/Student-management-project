@@ -16,7 +16,7 @@
 
         <div class="nice-form-group">
             <label>Search</label>
-            <input type="search" id="search" placeholder="Search Batch, Name or Type of Class" value="" /><br>
+            <input type="search" id="search" placeholder="Search by Enroll. No., Student Name, fee amount or class" value="" /><br>
         </div>
         <div class="top-links">
             <button class="button" id="search-button">Start Search</button>
