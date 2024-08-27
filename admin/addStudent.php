@@ -69,7 +69,14 @@ $conn->close();
     <?php endif; ?>
 
     <form action="handleAddStudent.php" method="post">
-        <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['token']); ?>">
+        <!-- <input type="hidden" name="token" value=" <?php echo htmlspecialchars($_SESSION['token']); ?> "> -->
+        <!-- <?php
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            echo "Session already started.";
+        } else {
+            echo "No active session.";
+        }
+        ?> -->
 
         <!-- ---------------------- Class Selection ------------------------- -->
 
@@ -95,7 +102,7 @@ $conn->close();
 
         <div class="nice-form-group">
             <label for="class_fees">Class Fees/Semester (6 months):</label>
-            <input type="text" id="class_fees" name="class_fees" placeholder="class fees" readonly required >
+            <input type="text" id="class_fees" name="class_fees" placeholder="class fees" readonly required>
         </div>
 
         <!-- ---------------------- Personal Details ------------------------- -->

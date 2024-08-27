@@ -73,4 +73,3 @@ $conn->close();
         <div class="overviewcard__info"><?php echo htmlspecialchars($pending_students); ?></div>
     </div>
 </div>
-<a href="./includes/resetFees.php">Reset Fees</a>

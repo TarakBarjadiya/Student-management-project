@@ -53,27 +53,36 @@ $conn->close();
 </head>
 
 <body>
-    <h1>Create Notification</h1>
-    <button class="button" id="search-button" onclick="window.location.href='notifications.php';">Back</button>
+    <h1>Send Notification</h1>
+    
 
     <form action="" method="POST">
-        <label for="class_select">Select Class:</label>
-        <select id="class_select" name="class_id" required>
-            <option value="">Select Class</option>
-        </select>
+        <div class="nice-form-group">
+            <label for="class_select">Select Class:</label>
+            <select id="class_select" name="class_id" required>
+                <option value="">Select Class</option>
+            </select>
+        </div>
 
-        <label for="student_select">Select Student:</label>
-        <select id="student_select" name="student_id" required>
-            <option value="">Select Student</option>
-        </select>
+        <div class="nice-form-group">
+            <label for="student_select">Select Student:</label>
+            <select id="student_select" name="student_id" required>
+                <option value="">Select Student</option>
+            </select>
+        </div>
 
-        <label for="notification_title">Title:</label>
-        <input type="text" name="notification_title" id="notification_title" required>
+        <div class="nice-form-group">
+            <label for="notification_title">Title:</label>
+            <input type="text" name="notification_title" id="notification_title" required>
+        </div>
 
-        <label for="notification_description">Description:</label>
-        <textarea name="notification_description" id="notification_description" required></textarea>
+        <div class="nice-form-group">
+            <label for="notification_description">Description:</label>
+            <textarea name="notification_description" style="resize: vertical;" id="notification_description" required></textarea>
+        </div>
 
-        <button type="submit">Create Notification</button>
+        <button class="input-button" id="search-button" onclick="window.location.href='notifications.php';">Back</button>
+        <button class="input-button" type="submit">Send Notification</button>
     </form>
 
     <script>

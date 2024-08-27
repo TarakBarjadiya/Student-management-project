@@ -1,13 +1,23 @@
-const wrapper = document.querySelector('.wrapper');
-const signUpLink = document.querySelector('.signUp-link');
-const signInLink = document.querySelector('.signIn-link');
+document.addEventListener('DOMContentLoaded', () => {
+  // Password match validation
+  const form = document.querySelector('form');
+  const passwordField = document.querySelector('input[name="new_password"]');
+  const confirmPasswordField = document.querySelector(
+    'input[name="confirm_password"]',
+  );
 
-signUpLink.addEventListener('click', () => {
-    wrapper.classList.add('animate-signIn');
-    wrapper.classList.remove('animate-signUp');
-});
+  form.addEventListener('submit', (event) => {
+    if (passwordField.value !== confirmPasswordField.value) {
+      alert('New Password and Confirm Password do not match!');
+      event.preventDefault(); // Prevent form submission
+    }
+  });
 
-signInLink.addEventListener('click', () => {
-    wrapper.classList.add('animate-signUp');
-    wrapper.classList.remove('animate-signIn');
+  // Show/hide password functionality
+  const showPassCheckbox = document.getElementById('showpass');
+  showPassCheckbox.addEventListener('change', () => {
+    const type = showPassCheckbox.checked ? 'text' : 'password';
+    passwordField.type = type;
+    confirmPasswordField.type = type;
+  });
 });

@@ -16,7 +16,7 @@
 
         <div class="nice-form-group">
             <label>Search</label>
-            <input type="search" id="search" placeholder="Search by Enroll. No., Student Name, fee amount or class" value="" /><br>
+            <input type="search" id="search" placeholder="Search by Enroll. No., Student Name,..." value="" /><br>
         </div>
         <div class="top-links">
             <button class="button" id="search-button">Start Search</button>

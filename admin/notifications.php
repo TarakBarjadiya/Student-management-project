@@ -32,7 +32,7 @@
         </div>
 
         <small>click on headers to sort table columns</small>
-        <div id="table-container" data-table-name="student_notifications" data-columns="id,student_name,notification_title,notification_date"></div>
+        <div id="table-container" data-table-name="student_notifications" data-columns="id,student_name,class_name,notification_title,notification_date"></div>
 
         <div class="pagination" id="pagination-bottom">
             <button id="prev-page-bottom"><span class="m-icon">arrow_back_ios</span></button>

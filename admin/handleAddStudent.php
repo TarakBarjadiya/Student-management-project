@@ -11,22 +11,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Generate and store token if not already set
-if (!isset($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
-}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate token
-    if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-        echo "<script>alert('Invalid Form Token!!'); window.location.href = 'addStudent.php';</script>";
-        exit; // Ensure exit to stop further execution
-    }
-
-    // Unset the token to prevent reuse
-    unset($_SESSION['token']);
-
     $classId = $_POST['class_name'];
     $firstName = $_POST['first_name'];
     $middleName = $_POST['middle_name'];

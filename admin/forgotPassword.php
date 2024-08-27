@@ -13,19 +13,10 @@
             if (params.get('error') === 'invalid_details') {
                 alert('Invalid Username or Password.');
             }
-        });
-
-        function togglePasswordVisibility() {
-            const passwordField = document.querySelector('input[name="password"]');
-            const showPassCheckbox = document.getElementById('showpass');
-
-            // Toggle password visibility based on checkbox state
-            if (showPassCheckbox.checked) {
-                passwordField.type = 'text';
-            } else {
-                passwordField.type = 'password';
+            if (params.get('error') === 'password_mismatch') {
+                alert('Both password must be same.');
             }
-        }
+        });
     </script>
 </head>
 
@@ -33,25 +24,28 @@
 
     <div class="wrapper">
         <div class="title-text">
-            <div class="title login">Admin Login</div>
+            <div class="title login">Reset Password</div>
         </div>
         <div class="form-container">
             <div class="form-inner">
-                <form action="handleLogin.php" method="post" class="login">
+                <form action="handlePassChange.php" method="post" class="login">
                     <div class="field">
-                        <input type="text" placeholder="Username / Email Address" name="email" required>
+                        <input type="email" placeholder="Email Address" name="email" title="Please enter an correct email address" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="New Password" name="new_password" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Confirm Password" name="confirm_password" required>
                     </div>
                     <div class="show-pass">
-                        <input id="showpass" type="checkbox" onchange="togglePasswordVisibility()">
+                        <input id="showpass" type="checkbox">
                         <label for="showpass">Show Password</label>
                     </div>
                     <div class="field">
-                        <input type="submit" value="Login">
+                        <input type="submit" value="Reset Password">
                     </div>
-                    <a href="forgotPassword.php" class="forgot-link">Forgot Password?</a>
+                    <a href="login.php" class="forgot-link">Back to Login</a>
                     <div class="signup-link">
                         <a href="../index.php">Back to Website</a>
                     </div>
