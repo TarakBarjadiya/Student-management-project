@@ -51,7 +51,7 @@
                     <div class="field">
                         <input type="submit" value="Login">
                     </div>
-                    <a href="forgotPassword.php" class="forgot-link">Forgot Password?</a>
+                    <a href="resetPassword.php" class="forgot-link">Reset Password</a>
                     <div class="signup-link">
                         <a href="../index.php">Back to Website</a>
                     </div>

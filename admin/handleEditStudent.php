@@ -11,13 +11,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check CSRF token
-if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-    die("Invalid CSRF token");
-}
-
 // Get form data
 $student_id = isset($_POST['student_id']) ? (int)$_POST['student_id'] : 0;
+$studentStatus = $_POST['stud_status'] ?? '';
 $classId = $_POST['class_name'] ?? '';
 $firstName = $_POST['first_name'] ?? '';
 $middleName = $_POST['middle_name'] ?? '';
@@ -72,7 +68,8 @@ if ($originalClassId != $classId) {
 // Update student information in the database
 $sql = "
     UPDATE student_info
-    SET class_id = ?,
+    SET stud_status = ?,
+        class_id = ?,
         first_name = ?,
         middle_name = ?,
         last_name = ?,
@@ -97,7 +94,8 @@ $sql = "
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param(
-    'issssssssssssssssssii',
+    'sissssssssssssssssssii',
+    $studentStatus,
     $classId,
     $firstName,
     $middleName,

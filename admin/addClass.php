@@ -67,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="class-type">Select type of class</label>
             <select onchange="updateClassFields()" id="class-type" name="class_type" required>
                 <option value="">Please select a value</option>
-                <option value="school">School</option>
                 <option value="college">College</option>
                 <option value="other">Other</option>
             </select>

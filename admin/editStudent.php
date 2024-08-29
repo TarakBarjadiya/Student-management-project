@@ -123,12 +123,23 @@ $conn->close();
     <?php endif; ?>
 
     <form action="handleEditStudent.php" method="post">
-        <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['token']); ?>">
         <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($student_id); ?>">
 
         <!-- ---------------------- Class Selection ------------------------- -->
 
         <h2>Academic Details</h2>
+
+        <div class="nice-form-group">
+            <label for="Status">Student Status:</label>
+            <div class="gender-select">
+                <input type="radio" id="onroll" name="stud_status" value="on roll" <?php echo ($student['stud_status'] == 'on roll') ? 'checked' : ''; ?> required>
+                <label for="onroll">Onroll</label>
+                <input type="radio" id="passout" name="stud_status" value="passout" <?php echo ($student['stud_status'] == 'passout') ? 'checked' : ''; ?> required>
+                <label for="passout">Passout</label>
+                <input type="radio" id="admsCncl" name="stud_status" value="admission canceled" <?php echo ($student['stud_status'] == 'admission canceled') ? 'checked' : ''; ?> required>
+                <label for="admsCncl">Admission Canceled</label>
+            </div>
+        </div>
 
         <div class="nice-form-group">
             <label for="class_type">Class Type:</label>

@@ -105,9 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             classNameSelect.innerHTML = '<option value="">--Select Standard/Degree--</option>';
 
             let options = [];
-            if (classType === 'School') {
-                options = standards;
-            } else if (classType === 'College') {
+            if (classType === 'College') {
                 options = degrees;
             }
 
@@ -139,7 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="class-type">Select type of class</label>
             <select id="class-type" name="class_type" required onchange="updateClassFields()">
                 <option value="">Please select a value</option>
-                <option value="School" <?= $classType === 'School' ? 'selected' : '' ?>>School</option>
                 <option value="College" <?= $classType === 'College' ? 'selected' : '' ?>>College</option>
                 <option value="Other" <?= $classType === 'Other' ? 'selected' : '' ?>>Other</option>
             </select>

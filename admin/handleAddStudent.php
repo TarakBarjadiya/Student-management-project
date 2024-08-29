@@ -11,7 +11,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $classId = $_POST['class_name'];
@@ -49,13 +48,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     } else {
         $enrollmentNumber = generateEnrollmentNumber($conn);
+
         // Prepare SQL statement to insert student information
-        $sql = "INSERT INTO student_info (enrollment_number, class_id, first_name, middle_name, last_name, gender, stud_dob, stud_address, house_no, address_2, address_3, state, city, postal_code, stud_mobile, stud_email, father_name, father_contact, mother_name, mother_contact, fees_pending) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO student_info (enrollment_number, class_id, first_name, middle_name, last_name, gender, stud_dob, stud_address, house_no, address_2, address_3, state, city, postal_code, stud_mobile, stud_email, father_name, father_contact, mother_name, mother_contact, fees_pending, stud_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, 'on roll')";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sissssssssssssssssssi", $enrollmentNumber, $classId, $firstName, $middleName, $lastName, $gender, $dob, $address, $house_no, $address_2, $address_3, $state, $city, $postal_code, $mobile, $email, $fatherName, $fatherContact, $motherName, $motherContact, $classFees);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Student Added Successfully!!'); window.location.href = 'addStudent.php';</script>";
+            // Generate password in the format FirstName@DDMMYYYY
+            $dobFormatted = date('dmY', strtotime($dob));
+            $password = $firstName . '@' . $dobFormatted;
+
+            // Hash the password before storing it
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Get the last inserted student ID from the connection
+            $studentId = $conn->insert_id;
+
+            // Insert into student_login table
+            $sqlLogin = "INSERT INTO student_login (student_id, password, failed_attempts, last_login) VALUES (?, ?, 0, NULL)";
+            $stmtLogin = $conn->prepare($sqlLogin);
+            $stmtLogin->bind_param("is", $studentId, $hashedPassword);
+
+            if ($stmtLogin->execute()) {
+                echo "<script>alert('Student Added Successfully!!'); window.location.href = 'addStudent.php';</script>";
+            } else {
+                echo "<script>alert('Error adding login details: " . $stmtLogin->error . "'); window.location.href = 'addStudent.php';</script>";
+            }
+
+            $stmtLogin->close();
         } else {
             echo "<script>alert('Error: " . $stmt->error . "'); window.location.href = 'addStudent.php';</script>";
         }
@@ -81,3 +102,4 @@ function generateEnrollmentNumber($conn)
         return "STUD0001";
     }
 }
+?>

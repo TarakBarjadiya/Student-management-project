@@ -46,7 +46,7 @@ if ($search_query) {
 // Fetch student data from the database with sorting and searching
 $query = "SELECT si.id, si.enrollment_number, si.class_id, si.stud_mobile, si.stud_email, 
           si.first_name, si.middle_name, si.last_name, si.gender, si.stud_dob, si.stud_address, 
-          si.father_name, si.mother_name, si.father_contact, si.mother_contact, 
+          si.father_name, si.mother_name, si.father_contact, si.mother_contact,si.stud_status, 
           c.class_name, c.batch_year 
           FROM student_info si 
           JOIN classes c ON si.class_id = c.id 
@@ -73,9 +73,9 @@ if (isset($_GET['export'])) {
     header('Content-Disposition: attachment;filename=students.csv');
 
     $output = fopen('php://output', 'w');
-    fputcsv($output, ['Enrollment Number', 'Name', 'Class', 'Mobile', 'Email', 'Gender', 'DOB', 'Address', 'Father Name', 'Mother Name', 'Father Contact', 'Mother Contact']);
+    fputcsv($output, ['Enrollment Number', 'Name', 'Class', 'Mobile', 'Email', 'Gender', 'DOB', 'Address', 'Father Name', 'Mother Name', 'Father Contact', 'Mother Contact', 'Student Status']);
 
-    $result_export = mysqli_query($conn, "SELECT si.enrollment_number, CONCAT(si.first_name, ' ', si.middle_name, ' ', si.last_name) AS name, c.class_name, si.stud_mobile, si.stud_email, si.gender, si.stud_dob, si.stud_address, si.father_name, si.mother_name, si.father_contact, si.mother_contact 
+    $result_export = mysqli_query($conn, "SELECT si.enrollment_number, CONCAT(si.first_name, ' ', si.middle_name, ' ', si.last_name) AS name, c.class_name, si.stud_mobile, si.stud_email, si.gender, si.stud_dob, si.stud_address, si.father_name, si.mother_name, si.father_contact, si.mother_contact,si.stud_status 
                                          FROM student_info si 
                                          JOIN classes c ON si.class_id = c.id 
                                          WHERE 1=1 $search_condition");
@@ -182,6 +182,7 @@ include "./includes/sidebar.php";
             <div class="card">
                 <div class="heading">
                     <h1><?php echo $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name']; ?></h1>
+                    <p class="subheading" style="text-transform: capitalize;"><i><?php echo $row['stud_status'] ?></p></i>
                     <p class="subheading"><?php echo $row['enrollment_number'] . ' | ' . $row['class_name'] . ' (' . $row['batch_year'] . ')'; ?></p>
                     <p class="subheading"><?php echo $row['stud_mobile'] . ' | ' . $row['stud_email']; ?></p>
                 </div>
@@ -216,7 +217,6 @@ include "./includes/sidebar.php";
                 </div>
                 <div class="actions">
                     <button onclick="editStudent(<?php echo $row['id']; ?>)">Edit</button>
-                    <button onclick="deleteStudent(<?php echo $row['id']; ?>, '<?php echo addslashes($row['first_name'] . ' ' . $row['last_name']); ?>')">Delete</button>
                 </div>
             </div>
         <?php } ?>
@@ -235,22 +235,11 @@ include "./includes/sidebar.php";
         }
         ?>
     </div>
-
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Are you sure you want to delete the student: <span id="studentName"></span>?</p>
-            <button id="confirmDelete" class="confirm-btn">Delete</button>
-            <button id="cancelDelete" class="cancel-btn">Cancel</button>
-        </div>
-    </div>
-
     <script>
         function editStudent(id) {
             window.location.href = './editStudent.php?id=' + id;
         }
     </script>
-    <script src="./js/deleteModal.js"></script>
 </body>
 
 </html>

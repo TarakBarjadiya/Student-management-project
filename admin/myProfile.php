@@ -1,9 +1,5 @@
+<?php include "./includes/sidebar.php"; ?>
 <?php
-if (!isset($_SESSION['id'])) {
-    // Redirect to login page if not logged in
-    header("Location: login.php");
-    exit();
-}
 
 $userId = $_SESSION['id'];
 
@@ -49,7 +45,6 @@ $stmt->close();
 $conn->close();
 ?>
 
-<?php include "./includes/sidebar.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">

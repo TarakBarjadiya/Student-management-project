@@ -5,54 +5,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Student Login </title>
+    <title> Admin Login </title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('error') === 'invalid_details') {
+                alert('Invalid Username or Password.');
+            }
+        });
+
+        function togglePasswordVisibility() {
+            const passwordField = document.querySelector('input[name="password"]');
+            const showPassCheckbox = document.getElementById('showpass');
+
+            // Toggle password visibility based on checkbox state
+            if (showPassCheckbox.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+    </script>
 </head>
 
 <body>
 
     <div class="wrapper">
-        <div class="form-wrapper sign-up">
-            <form action="">
-                <h2>Reset Your Password</h2>
-                <div class="input-group">
-                    <input type="email" required>
-                    <label for="">Email</label>
-                </div>
-                <div class="input-group">
-                    <input type="password" required>
-                    <label for="">New Password</label>
-                </div>
-                <div class="input-group">
-                    <input type="password" required>
-                    <label for="">Confirm Password</label>
-                </div>
-                <button type="submit" class="btn">Change Password</button>
-                <div class="sign-link">
-                    <p>Remember Your Password? <a href="#" class="signIn-link">Sign In</a></p>
-                </div>
-            </form>
+        <div class="title-text">
+            <div class="title login">Student Login</div>
         </div>
-
-        <div class="form-wrapper sign-in">
-            <form action="">
-                <h2>Student Login</h2>
-                <div class="input-group">
-                    <input type="text" required>
-                    <label for="">Email / Student ID</label>
-                </div>
-                <div class="input-group">
-                    <input type="password" required>
-                    <label for="">Password</label>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <div class="sign-link">
-                    <p><a href="#" class="signUp-link">Forgot Password?</a></p>
-                </div>
-            </form>
+        <div class="form-container">
+            <div class="form-inner">
+                <form action="handleLogin.php" method="post" class="login">
+                    <div class="field">
+                        <input type="text" placeholder="Enroll No. / Email Address / Mobile No." name="email" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Password" name="password" required>
+                    </div>
+                    <div class="show-pass">
+                        <input id="showpass" type="checkbox" onchange="togglePasswordVisibility()">
+                        <label for="showpass">Show Password</label>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Login">
+                    </div>
+                    <a href="resetPassword.php" class="forgot-link">Reset Password</a>
+                    <div class="signup-link">
+                        <a href="../index.php">Back to Website</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
     <script src="js/login.js"></script>
 </body>
 

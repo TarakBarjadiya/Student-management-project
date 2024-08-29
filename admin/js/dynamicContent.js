@@ -11,32 +11,7 @@ function updateClassFields() {
     '<option value="">--Select Standard/Degree--</option>';
 
   // Populate options based on class type
-  if (classType === 'school') {
-    var standards = [
-      'Class 1',
-      'Class 2',
-      'Class 3',
-      'Class 4',
-      'Class 5',
-      'Class 6',
-      'Class 7',
-      'Class 8',
-      'Class 9',
-      'Class 10',
-      'Class 11',
-      'Class 12',
-    ];
-    standards.forEach(function (standard) {
-      var option = document.createElement('option');
-      option.value = standard;
-      option.text = standard;
-      standardDegreeField.appendChild(option);
-    });
-    standardDegreeField.style.display = 'block';
-    standardDegreeField.setAttribute('required', 'required');
-    otherClassNameField.style.display = 'none';
-    otherClassNameField.removeAttribute('required');
-  } else if (classType === 'college') {
+  if (classType === 'college') {
     var degrees = ['BCA', 'BCom', 'BBA', 'BA', 'BSc', 'BTech'];
     degrees.forEach(function (degree) {
       var option = document.createElement('option');
