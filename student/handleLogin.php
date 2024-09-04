@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
 
                 $_SESSION['student_id'] = $student_id; // Store student_id in session
-                echo "Login successful!";
+                header("Location: dashboard.php");
                 // Redirect to dashboard or home page
             } else {
                 echo "Incorrect password. Please try again.";

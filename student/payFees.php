@@ -1,13 +1,9 @@
+<?php include "./includes/sidebar.php" ?>
+<?php include './includes/dbconnection.php'; ?>
+
 <?php
-include './includes/dbconnection.php'; // Database connection
-
-// Initialize variables
-$student_id = '';
-$student = null;
-
-// Fetch student and class details if ID is set
-if (isset($_GET['id'])) {
-    $student_id = $_GET['id'];
+if (isset($_SESSION['student_id'])) {
+    $student_id = $_SESSION['student_id'];
 
     // Use prepared statements to prevent SQL injection
     $query = "
@@ -16,7 +12,7 @@ if (isset($_GET['id'])) {
            CONCAT(si.first_name, ' ', si.middle_name, ' ', si.last_name) AS student_name, 
            si.fees_pending, 
            si.fees_paid, 
-           CONCAT(c.class_name, ' (', c.batch_year , ') ') as class_name
+           CONCAT(c.class_name, ' (Batch: ', c.batch_year , ') ') as class_name
     FROM student_info si
     JOIN classes c ON si.class_id = c.id
     WHERE si.id = ?
@@ -66,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'pay_fees') {
         mysqli_stmt_bind_param($stmt, 'dids', $new_fees_pending, $new_fees_paid, $paid_date, $student_id);
 
         if (mysqli_stmt_execute($stmt)) {
-            echo "<script>alert('Payment updated successfully!'); window.location.href = 'fees.php?id={$student_id}';</script>";
+            echo "<script>alert('Payment updated successfully!'); window.location.href = 'payFees.php?id={$student_id}';</script>";
         } else {
             echo "Error: " . $sql . " " . mysqli_error($conn);
         }
@@ -77,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'pay_fees') {
     mysqli_close($conn);
 }
 ?>
-<?php include "./includes/sidebar.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -124,17 +119,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'pay_fees') {
         <input type="hidden" name="action" value="pay_fees">
 
         <div class="nice-form-group">
-            <label for="enrollment_number">Enrollment Number:</label>
-            <input type="text" id="enrollment_number" name="enrollment_number" value="<?php echo htmlspecialchars($student['enrollment_number']); ?>" readonly>
+            <label for="enrollment_number">Student Details:</label>
+            <input type="text" id="enrollment_number" name="enrollment_number" value="<?php echo htmlspecialchars($student['enrollment_number'] . ' - ' . $student['student_name']); ?>" readonly>
         </div>
 
         <div class="nice-form-group">
-            <label for="first_name">Student Name:</label>
-            <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($student['student_name']); ?>" readonly>
-        </div>
-
-        <div class="nice-form-group">
-            <label for="class_name">Class Name:</label>
+            <label for="class_name">Class:</label>
             <input type="text" id="class_name" name="class_name" value="<?php echo htmlspecialchars($student['class_name']); ?>" readonly>
         </div>
 
@@ -154,7 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'pay_fees') {
         </div>
 
         <input class="input-button" type="button" value="Save Changes" onclick="submitPaymentForm();">
-        <input class="input-button" type="button" value="Back" onclick="window.location.href = 'fees.php';">
     </form>
 </body>
 

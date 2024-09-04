@@ -58,7 +58,7 @@ if (isset($_GET['notification_id'])) {
                 <p><?php echo htmlspecialchars($notification['classname']); ?></p>
             </div>
             <div class="details">
-                <div class="column">
+                <div>
                     <p><strong>Title</strong>
                     <div><?php echo htmlspecialchars($notification['notification_title']); ?></div>
                     </p>

@@ -1,0 +1,237 @@
+@import url("../../css/fonts.css");
+
+.card {
+    background-color: #ffffff;
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 15px;
+    /* Prevent overflow */
+}
+
+.heading {
+    background-color: #e4ecfe;
+    padding: 10px;
+}
+
+.heading h1 {
+    color: rgb(39, 39, 39) !important;
+    font-weight: 500 !important;
+    margin: 0;
+    font-size: 24px;
+    text-align: left;
+    font-family: "PBold";
+}
+
+.subheading {
+    color: #666666;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 4px;
+    text-align: left;
+}
+
+.details {
+    /* margin-top: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
+}
+
+.column {
+    width: 32%;
+    box-sizing: border-box;
+    /* Ensure padding and borders are included in the width */
+}
+
+.inline-inputs {
+    margin-block-end: 0;
+}
+
+.top-links {
+    button {
+        padding: 10px 15px;
+        font-family: "PRegular";
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        width: fit-content;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        color: white;
+        background-color: #0056b3;
+    }
+}
+
+.search-container {
+    .nice-form-group {
+        display: flex;
+        align-items: center;
+        margin: 0px 0px 0px 0px;
+    }
+
+    label {
+        margin-right: 5px;
+    }
+
+    input[type="search"] {
+        width: 70%;
+    }
+}
+
+.sort-options {
+    .nice-form-group {
+        display: flex;
+        align-items: center;
+        margin: 0px 0px 0px 0px;
+    }
+
+    label {
+        margin-right: 5px;
+    }
+
+    select {
+        width: 50%;
+    }
+}
+
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows pagination links to wrap to the next line */
+    gap: 5px;
+    /* Space between pagination items */
+    margin: 10px 0;
+    justify-content: center;
+    /* Center pagination items horizontally */
+}
+
+.pagination a {
+    display: inline-block;
+    width: 40px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: #333;
+    padding: 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    /* Rounded corners for pagination links */
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination a.active:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.pagination a:hover {
+    background-color: #e0e0e0;
+    /* Light grey background on hover for non-active links */
+}
+
+
+
+.address {
+    width: 100%;
+    text-align: justify;
+}
+
+p {
+    margin: 4px 0;
+    word-break: break-word;
+    /* Ensure long words break to fit within the container */
+}
+
+strong {
+    color: #333;
+}
+
+.actions {
+    margin: 15px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.actions button {
+    padding: 10px 15px;
+    font-family: "PRegular";
+    border: none;
+    border-radius: 5px;
+    background-color: #427de3;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .details {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .address {
+        margin-top: 4px;
+    }
+
+    .search-container .nice-form-group {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            margin-right: 5px;
+        }
+
+        input[type="search"] {
+            width: 100%;
+        }
+    }
+
+    .inline-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            margin-right: 5px;
+        }
+
+        .nice-form-group {
+            margin-top: 10px;
+            flex-direction: column;
+        }
+
+        select {
+            width: 150%;
+        }
+    }
+}

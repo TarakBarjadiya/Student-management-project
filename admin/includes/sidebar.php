@@ -34,7 +34,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <div class='dashboard-nav-dropdown'>
                 <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['addClass.php', 'manageClass.php']) ? 'active' : ''; ?>">
                     <span class="nav-m-icon">meeting_room</span>
-                    <span>Class</span>
+                    <span>Classes</span>
                 </a>
                 <div class='dashboard-nav-dropdown-menu'>
                     <a href="./addClass.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'addClass.php' ? 'active' : ''; ?>">
@@ -43,14 +43,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </a>
                     <a href="./manageClass.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'manageClass.php' ? 'active' : ''; ?>">
                         <span class="nav-m-icon">settings</span>
-                        <span>Manage Class</span>
+                        <span>Manage Classes</span>
                     </a>
                 </div>
             </div>
 
             <!-- students menu -->
             <div class='dashboard-nav-dropdown'>
-                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['addStudent.php', 'manageStudents.php', 'attendance.php', 'fees.php', 'notifications.php', 'results.php']) ? 'active' : ''; ?>">
+                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['addStudent.php', 'manageStudents.php', 'fees.php', 'notifications.php']) ? 'active' : ''; ?>">
                     <span class="nav-m-icon">diversity_3</span>
                     <span>Students</span>
                 </a>
@@ -114,17 +114,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <!-- requests menu -->
             <div class='dashboard-nav-dropdown'>
                 <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['requests_pending.php', 'requests_arch.php']) ? 'active' : ''; ?>">
-                    <span class="nav-m-icon">hourglass</span>
+                    <span class="nav-m-icon">fact_check</span>
                     <span>Requests</span>
                 </a>
                 <div class='dashboard-nav-dropdown-menu'>
                     <a href="./requests_pending.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'requests_pending.php' ? 'active' : ''; ?>">
-                        <span class="nav-m-icon">hourglass_top</span>
+                        <span class="nav-m-icon">check</span>
                         <span>Pending</span>
                     </a>
                     <a href="./requests_arch.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'requests_arch.php' ? 'active' : ''; ?>">
-                        <span class="nav-m-icon">hourglass_bottom</span>
-                        <span>Completed</span>
+                        <span class="nav-m-icon">done_all</span>
+                        <span>Approved</span>
                     </a>
                 </div>
             </div>

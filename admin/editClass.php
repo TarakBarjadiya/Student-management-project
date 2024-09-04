@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="submit-cancel">
             <input class="input-button" type="submit" value="Save Changes">
-            <a class="link-none" href="./manageClass.php">Cancel</a>
+            <button class="input-button" type="button" id="search-button" onclick="window.location.href='manageClass.php';">Back</button>
         </div>
     </form>
 
