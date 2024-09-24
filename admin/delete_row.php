@@ -23,7 +23,7 @@ if ($table === 'classes') {
     $row = $result->fetch_assoc();
 
     if ($row['student_count'] > 0) {
-        echo json_encode(['error' => 'Cannot delete class because students are still assigned to it. Please remove students first.']);
+        echo json_encode(['error' => 'Cannot delete class because students are still assigned to it.']);
         $checkStudents->close();
         $conn->close();
         exit;

@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $studentId = $conn->insert_id;
 
             // Insert into student_login table
-            $sqlLogin = "INSERT INTO student_login (student_id, password, failed_attempts, last_login) VALUES (?, ?, 0, NULL)";
+            $sqlLogin = "INSERT INTO student_login (student_id, password, last_login) VALUES (?, ?, NULL)";
             $stmtLogin = $conn->prepare($sqlLogin);
             $stmtLogin->bind_param("is", $studentId, $hashedPassword);
 

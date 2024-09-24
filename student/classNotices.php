@@ -1,18 +1,30 @@
 <?php include "./includes/sidebar.php"; ?>
-<?php include "./includes/dbconnection.php";?>
+<?php include "./includes/dbconnection.php"; ?>
 
 <?php
 if (isset($_SESSION['student_id'])) {
     $student_id = $_SESSION['student_id'];
 
-    // Fetch notifications for the logged-in student
+    // Fetch the class_id for the logged-in student
     $stmt = $conn->prepare("
-        SELECT notification_title, notification_description, notification_date 
-        FROM student_notifications 
-        WHERE student_id = ?
-        ORDER BY notification_date DESC
+        SELECT class_id 
+        FROM student_info 
+        WHERE id = ?
     ");
     $stmt->bind_param("i", $student_id);
+    $stmt->execute();
+    $stmt->bind_result($class_id);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Fetch class notices for the student's class
+    $stmt = $conn->prepare("
+        SELECT c_notice_title, c_notice_description, publish_date 
+        FROM class_notices 
+        WHERE class_id = ?
+        ORDER BY publish_date DESC
+    ");
+    $stmt->bind_param("i", $class_id);
     $stmt->execute();
     $stmt->store_result();
 
@@ -22,7 +34,7 @@ if (isset($_SESSION['student_id'])) {
         // Initialize variables to track dates
         $currentDateLabel = "";
 
-        echo '<h1>Notifications</h1>';
+        echo '<h1>Class Notices</h1>';
         echo '<div class="notifications">';
 
         while ($stmt->fetch()) {
@@ -51,7 +63,7 @@ if (isset($_SESSION['student_id'])) {
                 $currentDateLabel = $dateLabel;
             }
 
-            // Display the notification
+            // Display the class notice
             echo '<div class="notification">';
             echo '<h3>' . htmlspecialchars($title) . '</h3>';
             echo '<p>' . htmlspecialchars($description) . '</p>';
@@ -63,9 +75,9 @@ if (isset($_SESSION['student_id'])) {
         echo "</div>";
         echo '</div>';
     } else {
-        echo '<h1>Notifications</h1>';
-        // No notifications found
-        echo "<p>No notifications found.</p>";
+        echo '<h1>Class Notices</h1>';
+        // No notices found
+        echo "<p>No notices found.</p>";
     }
 
     $stmt->close();

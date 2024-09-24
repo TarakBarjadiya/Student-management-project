@@ -54,7 +54,7 @@ $conn->close();
 
 <body>
     <h1>Send Notification</h1>
-    
+
 
     <form action="" method="POST">
         <div class="nice-form-group">
@@ -95,7 +95,8 @@ $conn->close();
                     data.forEach(classItem => {
                         const option = document.createElement('option');
                         option.value = classItem.id;
-                        option.textContent = classItem.class_name;
+                        // Display both class_name and batch_year
+                        option.textContent = `${classItem.class_name} (${classItem.batch_year})`;
                         classSelect.appendChild(option);
                     });
                 });

@@ -1,7 +1,7 @@
 <?php
 include 'dbconnection.php'; // Database connection
 
-$sql = "SELECT id, class_name FROM classes";
+$sql = "SELECT id, class_name, batch_year FROM classes";
 $result = $conn->query($sql);
 
 $classes = [];

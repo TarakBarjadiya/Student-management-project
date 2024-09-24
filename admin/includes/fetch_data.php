@@ -30,6 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   FROM student_notifications
                   JOIN student_info ON student_notifications.student_id = student_info.id
                   JOIN classes ON student_info.class_id = classes.id";
+    } elseif ($tableName === 'class_notices') {
+        // $columns[] = 'student_name'; // Add other columns if needed
+        $columnsList = implode(', ', $columns);
+        $query = "SELECT class_notices.*, CONCAT(classes.class_name, ' (', classes.batch_year, ')') AS class_name
+          FROM class_notices
+          JOIN classes ON class_notices.class_id = classes.id";
     } else {
         $columnsList = implode(', ', $columns);
         $query = "SELECT $columnsList FROM $tableName";

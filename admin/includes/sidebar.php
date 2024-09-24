@@ -84,7 +84,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <div class='dashboard-nav-dropdown-menu'>
                     <a href="./addClassNotice.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'addClassNotice.php' ? 'active' : ''; ?>">
                         <span class="nav-m-icon">box_add</span>
-                        <span>Add Notice</span>
+                        <span>Send Notice</span>
                     </a>
                     <a href="./manageClassNotices.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'manageClassNotices.php' ? 'active' : ''; ?>">
                         <span class="nav-m-icon">box_edit</span>
@@ -102,7 +102,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <div class='dashboard-nav-dropdown-menu'>
                     <a href="./addPublicNotice.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'addPublicNotice.php' ? 'active' : ''; ?>">
                         <span class="nav-m-icon">box_add</span>
-                        <span>Add Notice</span>
+                        <span>Send Notice</span>
                     </a>
                     <a href="./managePublicNotices.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'managePublicNotices.php' ? 'active' : ''; ?>">
                         <span class="nav-m-icon">box_edit</span>

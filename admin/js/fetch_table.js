@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
     fees_pending: 'Fees Pending',
     fees_paid: 'Fees Paid',
 
-    student_name:'Student Name',
-    notification_title:'Notification Title',
-    notification_date:'Notification Date'
+    student_name: 'Student Name',
+    notification_title: 'Notification Title',
+    notification_date: 'Notification Date',
+
+    c_notice_title: 'Notice Title',
+    publish_date: 'Publish Date'
   };
 
   let tableData = [];
@@ -104,6 +107,13 @@ document.addEventListener('DOMContentLoaded', function () {
         tableHtml += `
           <td>
             <a href="viewNotification.php?notification_id=${row.notification_id}&table=${tableName}" class="edit-link">Details</a>
+          </td>`;
+        tableHtml += '</tr>';
+      }
+      if (tableName === 'class_notices') {
+        tableHtml += `
+          <td>
+            <a href="viewClassNotice.php?notice_id=${row.id}&table=${tableName}" class="edit-link">Details</a>
           </td>`;
         tableHtml += '</tr>';
       }
@@ -240,14 +250,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function deleteRecord() {
     fetch('./delete_row.php?id=' + deleteId + '&table=' + deleteTable, {
-        method: 'GET',
+      method: 'GET',
     })
-    .then((response) => response.json())
-    .then((data) => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.error) {
-            console.error('Error:', data.error);
-            alert(data.error); // Display error message to the user
-            return;
+          console.error('Error:', data.error);
+          alert(data.error); // Display error message to the user
+          return;
         }
 
         // Hide the modal
@@ -260,9 +270,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Re-render the table
         renderTable(filteredData, columnNames, currentPage);
         updatePaginationControls(filteredData);
-    })
-    .catch((error) => console.error('Error deleting record:', error));
-}
+      })
+      .catch((error) => console.error('Error deleting record:', error));
+  }
 
   function addPaginationEventListeners() {
     const pageButtonsTop = document.querySelectorAll(

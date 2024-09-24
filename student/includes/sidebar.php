@@ -42,14 +42,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span>Notifications</span>
             </a>
 
-            <a href="./dashboard.php" class="dashboard-nav-item <?php echo $current_page == 'classNotices.php' ? 'active' : ''; ?>">
+            <a href="./classNotices.php" class="dashboard-nav-item <?php echo $current_page == 'classNotices.php' ? 'active' : ''; ?>">
                 <span class="nav-m-icon">auto_stories</span>
                 <span>Class Notices</span>
             </a>
             
-            <a href="./dashboard.php" class="dashboard-nav-item <?php echo $current_page == 'sendRequest.php' ? 'active' : ''; ?>">
+            <a href="./requests.php" class="dashboard-nav-item <?php echo $current_page == 'requests.php' ? 'active' : ''; ?>">
                 <span class="nav-m-icon">send</span>
-                <span>Send Request</span>
+                <span>My Requests</span>
             </a>
 
             <!-- logout menu -->
