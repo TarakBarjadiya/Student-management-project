@@ -100,7 +100,6 @@ include "./includes/sidebar.php";
     <title>Manage Student</title>
     <link rel="stylesheet" href="./css/table.css">
     <link rel="stylesheet" href="./css/cards.css">
-    <link rel="stylesheet" href="./css/deleteModal.css">
     <script>
         function refreshPage() {
             window.location.href = 'manageStudents.php';

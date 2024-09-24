@@ -35,7 +35,6 @@ h1 {
 
 /* Status Styles */
 .status {
-    font-weight: bold;
     padding: 5px 10px;
     border-radius: 3px;
 }
@@ -48,6 +47,11 @@ h1 {
 .status.approved {
     background-color: #28a745;
     color: white;
+}
+
+.status.rejected { /* New style for disapproved status */
+    background-color: #dc3545; /* Red background */
+    color: white; /* White text */
 }
 
 /* Back Button */

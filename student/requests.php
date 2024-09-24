@@ -13,7 +13,7 @@ if (!isset($_SESSION['student_id'])) {
 $student_id = $_SESSION['student_id'];
 
 // Fetch the student's requests from the database
-$sql = "SELECT request_id, request_title, request_description, request_date, status FROM requests WHERE student_id = ? ORDER BY request_date DESC";
+$sql = "SELECT id, request_title, request_description, request_date, status FROM requests WHERE student_id = ? ORDER BY request_date DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $student_id);
 $stmt->execute();
@@ -65,7 +65,7 @@ $conn->close();
                                 </span>
                             </td>
                             <td>
-                                <a href="viewRequest.php?request_id=<?php echo $request['request_id']; ?>" class="button">View Details</a>
+                                <a href="viewRequest.php?request_id=<?php echo $request['id']; ?>" class="button">View Details</a>
                             </td>
                         </tr>
                     <?php } ?>

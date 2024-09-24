@@ -112,22 +112,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
 
             <!-- requests menu -->
-            <div class='dashboard-nav-dropdown'>
-                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['requests_pending.php', 'requests_arch.php']) ? 'active' : ''; ?>">
-                    <span class="nav-m-icon">fact_check</span>
-                    <span>Requests</span>
-                </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="./requests_pending.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'requests_pending.php' ? 'active' : ''; ?>">
-                        <span class="nav-m-icon">check</span>
-                        <span>Pending</span>
-                    </a>
-                    <a href="./requests_arch.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'requests_arch.php' ? 'active' : ''; ?>">
-                        <span class="nav-m-icon">done_all</span>
-                        <span>Approved</span>
-                    </a>
-                </div>
-            </div>
+            <a href="./requests.php" class="dashboard-nav-item <?php echo $current_page == 'requests.php' ? 'active' : ''; ?>">
+                <span class="nav-m-icon">fact_check</span>
+                <span>Requests</span>
+            </a>
 
             <!-- logout menu -->
             <div class="nav-item-divider"></div>

@@ -7,7 +7,7 @@ if (isset($_GET['request_id'])) {
     $request_id = (int)$_GET['request_id'];
 
     // Fetch the request details from the database
-    $sql = "SELECT request_title, request_description, request_date, status FROM requests WHERE request_id = ?";
+    $sql = "SELECT request_title, request_description, request_date, status FROM requests WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $request_id);
     $stmt->execute();

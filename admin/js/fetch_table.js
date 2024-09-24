@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     notification_date: 'Notification Date',
 
     c_notice_title: 'Notice Title',
-    publish_date: 'Publish Date'
+    publish_date: 'Publish Date',
   };
 
   let tableData = [];
@@ -48,6 +48,29 @@ document.addEventListener('DOMContentLoaded', function () {
   const tableName = tableContainer.getAttribute('data-table-name');
   let columns = tableContainer.getAttribute('data-columns');
 
+  // fetch('./includes/fetch_data.php', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //   body: new URLSearchParams({
+  //     table: tableName,
+  //     columns: columns,
+  //   }),
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     console.log('Fetched data:', data);
+  //     if (data.error) {
+  //       console.error(data.error);
+  //       return;
+  //     }
+  //     tableData = data.data;
+  //     columnNames = data.columns.filter((col) => col !== 'id');
+  //     filteredData = tableData;
+  //     renderTable(filteredData, columnNames, currentPage);
+  //     updatePaginationControls(filteredData);
+  //   })
+  //   .catch((error) => console.error('Error fetching data:', error));
+
   fetch('./includes/fetch_data.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -56,19 +79,40 @@ document.addEventListener('DOMContentLoaded', function () {
       columns: columns,
     }),
   })
-    .then((response) => response.json())
+    .then((response) => response.text()) // Change to text() for debugging
     .then((data) => {
-      if (data.error) {
-        console.error(data.error);
+      console.log(data); // Log the raw response for inspection
+      const jsonData = JSON.parse(data); // Then parse it
+      if (jsonData.error) {
+        console.error(jsonData.error);
         return;
       }
-      tableData = data.data;
-      columnNames = data.columns.filter((col) => col !== 'id');
+      tableData = jsonData.data;
+      columnNames = jsonData.columns.filter((col) => col !== 'id');
       filteredData = tableData;
       renderTable(filteredData, columnNames, currentPage);
       updatePaginationControls(filteredData);
     })
     .catch((error) => console.error('Error fetching data:', error));
+
+  const statusFilter = document.getElementById('statusFilter');
+
+  statusFilter.addEventListener('change', function () {
+    filterByStatus();
+  });
+
+  function filterByStatus() {
+    const selectedStatus = statusFilter.value;
+    filteredData = tableData.filter((row) => {
+      if (selectedStatus === 'all') {
+        return true; // Show all if 'All' is selected
+      }
+      return row.status.toLowerCase() === selectedStatus.toLowerCase();
+    });
+    currentPage = 1;
+    renderTable(filteredData, columnNames, currentPage);
+    updatePaginationControls(filteredData);
+  }
 
   function renderTable(data, columnNames, page) {
     let start = (page - 1) * rowsPerPage;
@@ -114,6 +158,13 @@ document.addEventListener('DOMContentLoaded', function () {
         tableHtml += `
           <td>
             <a href="viewClassNotice.php?notice_id=${row.id}&table=${tableName}" class="edit-link">Details</a>
+          </td>`;
+        tableHtml += '</tr>';
+      }
+      if (tableName === 'requests') {
+        tableHtml += `
+          <td>
+            <a href="viewRequest.php?request_id=${row.id}&table=${tableName}" class="edit-link">View</a>
           </td>`;
         tableHtml += '</tr>';
       }

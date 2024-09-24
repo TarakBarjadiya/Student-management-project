@@ -36,6 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = "SELECT class_notices.*, CONCAT(classes.class_name, ' (', classes.batch_year, ')') AS class_name
           FROM class_notices
           JOIN classes ON class_notices.class_id = classes.id";
+    } elseif ($tableName === 'requests') {
+        $columnsList = implode(', ', $columns);
+        $query = "SELECT r.id,r.request_title,r.request_description,r.request_date,r.status,
+        CONCAT(s.first_name, ' ', s.last_name, ' (',c.class_name, '-', c.batch_year, ')') as student_details
+        FROM requests r
+        JOIN student_info s ON r.student_id = s.id
+        JOIN classes c ON s.class_id = c.id
+        ORDER BY r.request_date DESC;";
     } else {
         $columnsList = implode(', ', $columns);
         $query = "SELECT $columnsList FROM $tableName";

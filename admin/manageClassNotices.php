@@ -40,15 +40,6 @@
         </div>
 
     </section>
-    <!-- Delete Confirmation Modal -->
-    <div id="delete-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Are you sure you want to delete this class?</p>
-            <button id="confirm-delete" class="confirm-btn">Delete</button>
-            <button id="cancel-delete" class="cancel-btn">Cancel</button>
-        </div>
-    </div>
     <script defer src="./js/fetch_table.js"></script>
 </body>
 
