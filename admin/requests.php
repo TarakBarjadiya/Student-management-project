@@ -19,12 +19,13 @@
             color: #333;
             cursor: pointer;
             margin-bottom: 15px;
+            font: inherit;
+            font-size: 14px;
         }
 
         /* Dropdown for status filter */
         #statusFilter option {
             padding: 10px;
-            font-size: 14px;
         }
 
         #status-label {

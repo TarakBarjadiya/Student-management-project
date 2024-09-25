@@ -38,6 +38,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    table-layout: fixed; /* Ensures all columns are of equal width */
 }
 
 th,
@@ -46,6 +47,9 @@ td {
     text-align: left;
     border-bottom: 1px solid #ddd;
     vertical-align: middle; /* Center align text vertically */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Ensures overflow is handled */
+    text-overflow: ellipsis; /* Adds ... for long text */
 }
 
 th {
@@ -76,6 +80,12 @@ tr:hover {
 .status {
     padding: 5px 10px;
     border-radius: 3px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds ... for long text */
+    text-align: center;
+    width: 100px; /* Ensures all status boxes have the same width */
 }
 
 .status.pending {
@@ -112,5 +122,9 @@ tr:hover {
 
     table {
         font-size: 14px;
+    }
+
+    .status {
+        width: 80px; /* Make status boxes smaller on smaller screens */
     }
 }

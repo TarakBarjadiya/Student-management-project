@@ -67,6 +67,8 @@ if (isset($_GET['request_id'])) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px auto;
             max-width: 600px;
+            word-wrap: break-word;
+            /* Ensures long words break onto the next line */
         }
 
         .request-card h2 {
@@ -79,6 +81,8 @@ if (isset($_GET['request_id'])) {
             margin-bottom: 10px;
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
+            word-wrap: break-word;
+            /* Ensures long text breaks onto the next line */
         }
 
         .request-card .field label {
@@ -90,6 +94,8 @@ if (isset($_GET['request_id'])) {
         .request-card .field p {
             margin: 0;
             color: #333;
+            word-break: break-word;
+            /* Ensures long words break when necessary */
         }
 
         .status-update-form {
@@ -125,6 +131,7 @@ if (isset($_GET['request_id'])) {
             background-color: #0056b3;
         }
     </style>
+
 </head>
 
 <body>

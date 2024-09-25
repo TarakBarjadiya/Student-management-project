@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'pay_fees') {
             <input type="text" id="paid_amount" name="paid_amount" required>
         </div>
 
-        <input class="input-button" type="button" value="Save Changes" onclick="submitPaymentForm();">
+        <input class="input-button" type="button" value="Pay Fees" onclick="submitPaymentForm();">
     </form>
 </body>
 
