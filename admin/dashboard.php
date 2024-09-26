@@ -1,6 +1,6 @@
-<?php include "./includes/dbconnection.php" ?>
+<?php include "./includes/dbconnection.php"; ?>
+<?php include "./includes/sidebar.php"; ?>
 
-<?php include "./includes/sidebar.php" ?>
 <?php
 $number_of_classes = "SELECT COUNT(*) AS total_classes FROM classes";
 $result = $conn->query($number_of_classes);
@@ -44,13 +44,24 @@ if ($result) {
     $error_message = $conn->error;
 }
 
+// Query for the number of pending requests
+$pending_requests_query = "SELECT COUNT(*) AS pending_requests FROM requests WHERE status = 'pending'";
+$result = $conn->query($pending_requests_query);
+$pending_requests = 0;
+if ($result) {
+    $row = $result->fetch_assoc();
+    $pending_requests = $row['pending_requests'];
+} else {
+    $error_message = $conn->error;
+}
+
 $conn->close();
 ?>
 
 <link rel="stylesheet" href="./css/dashboard.css">
 <link rel="stylesheet" href="./css/cards.css">
 
-<!--Begin Main Overview-->
+<!-- Begin Main Overview -->
 <div class="main-overview">
     <div class="overviewcard g-student">
         <div class="overviewcard__icon">Total Students</div>
@@ -62,7 +73,7 @@ $conn->close();
     </div>
     <div class="overviewcard g-requests">
         <div class="overviewcard__icon">Pending Requests</div>
-        <div class="overviewcard__info">{number}</div>
+        <div class="overviewcard__info"><?php echo htmlspecialchars($pending_requests); ?></div>
     </div>
     <div class="overviewcard g-cfees">
         <div class="overviewcard__icon">Remaining Fees</div>

@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include "./includes/sidebar.php" ?>
-    <h1>Edit Record</h1>
+    <h1>Edit Class</h1>
     <form method="post">
         <div class="nice-form-group">
             <label for="class-type">Select type of class</label>

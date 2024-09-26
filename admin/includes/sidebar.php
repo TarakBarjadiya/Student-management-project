@@ -16,7 +16,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span class="m-icon">menu</span>
             </a>
             <a href="#" class="brand-logo">
-                <span>XYZ Name</span>
+                <span>Perennial</span>
             </a>
             <a href="./myProfile.php" class="sidebar-profile">
                 <span class="m-icon">account_circle</span>
@@ -93,28 +93,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </div>
             </div>
 
-            <!-- public notices menu -->
-            <div class='dashboard-nav-dropdown'>
-                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle <?php echo in_array($current_page, ['addPublicNotice.php', 'managePublicNotices.php']) ? 'active' : ''; ?>">
-                    <span class="nav-m-icon">public</span>
-                    <span>Public Notices</span>
-                </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="./addPublicNotice.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'addPublicNotice.php' ? 'active' : ''; ?>">
-                        <span class="nav-m-icon">box_add</span>
-                        <span>Send Notice</span>
-                    </a>
-                    <a href="./managePublicNotices.php" class="dashboard-nav-dropdown-item <?php echo $current_page == 'managePublicNotices.php' ? 'active' : ''; ?>">
-                        <span class="nav-m-icon">box_edit</span>
-                        <span>Manage Notices</span>
-                    </a>
-                </div>
-            </div>
-
             <!-- requests menu -->
             <a href="./requests.php" class="dashboard-nav-item <?php echo $current_page == 'requests.php' ? 'active' : ''; ?>">
                 <span class="nav-m-icon">fact_check</span>
                 <span>Requests</span>
+            </a>
+
+            <!-- inquiries menu -->
+            <a href="./inquiries.php" class="dashboard-nav-item <?php echo $current_page == 'inquiries.php' ? 'active' : ''; ?>">
+                <span class="nav-m-icon">contact_support</span>
+                <span>Inquiries</span>
             </a>
 
             <!-- logout menu -->

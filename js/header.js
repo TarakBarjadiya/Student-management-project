@@ -1,4 +1,4 @@
-console.log("header.js loaded.")
+console.log('header.js loaded.');
 
 document.addEventListener('DOMContentLoaded', function () {
   var currentPath = window.location.pathname;
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Check for dropdown menu items
   var dropdownLinks = document.querySelectorAll('.dropdown-content a');
   dropdownLinks.forEach(function (link) {
     if (link.href.includes(currentPath)) {
@@ -19,34 +18,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Add event listener for clicks outside the dropdown
   document.addEventListener('click', function (event) {
     var dropdownContent = document.querySelector('.dropdown .dropdown-content');
     var isClickInsideDropdown = event.target.closest('.dropdown');
     if (!isClickInsideDropdown) {
       dropdownContent.style.display = 'none';
     }
+
+    // Close sidebar if clicking outside of it
+    var sidebar = document.getElementById('sidebar');
+    var isClickInsideSidebar =
+      event.target.closest('#sidebar') || event.target.closest('.menu-toggle');
+    if (!isClickInsideSidebar) {
+      sidebar.classList.remove('active'); // Close the sidebar
+    }
   });
 });
 
-function onMenuClick() {
-  console.log('clicked');
-  var navBar = document.getElementById('navigation-bar');
-  if (navBar.className === 'nav-bar') {
-    navBar.className += ' responsive';
-  } else {
-    navBar.className = 'nav-bar';
-  }
+function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('active');
 }
 
 function toggleDropdown() {
-  var dropdown = document.querySelector('.dropdown');
   var dropdownContent = document.querySelector('.dropdown .dropdown-content');
-  if (dropdownContent.style.display === 'block') {
-    dropdownContent.style.display = 'none';
-    dropdown.classList.remove('show');
-  } else {
-    dropdownContent.style.display = 'block';
-    dropdown.classList.add('show');
-  }
+  dropdownContent.style.display =
+    dropdownContent.style.display === 'block' ? 'none' : 'block';
 }

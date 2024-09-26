@@ -17,7 +17,8 @@ $row = $result->fetch_assoc();
 
 if ($row) {
 ?>
-    <h1>My Profile</h1>
+    <h1>Hello, <?php echo htmlspecialchars($first_name) . ' ' . htmlspecialchars($last_name); ?></h1>
+    <h2>Your Profile:</h2>
     <link rel="stylesheet" href="./css/cards.css">
     <div class="card">
         <div class="heading">

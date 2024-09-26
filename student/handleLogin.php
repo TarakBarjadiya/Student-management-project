@@ -42,16 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
 
                 $_SESSION['student_id'] = $student_id; // Store student_id in session
-                header("Location: dashboard.php");
+                header("Location: myProfile.php");
                 // Redirect to dashboard or home page
             } else {
-                echo "Incorrect password. Please try again.";
+                echo "<script>alert('Incorrect Password!!Please try again.'); window.location.href = 'login.php';</script>";
             }
         } else {
-            echo "No login record found for this student.";
+            echo "<script>alert('No login record found for this student.'); window.location.href = 'login.php';</script>";
         }
     } else {
-        echo "No account found with that login information.";
+        echo "<script>alert('No account found with that login information.'); window.location.href = 'login.php';</script>";
     }
 
     $stmt->close();

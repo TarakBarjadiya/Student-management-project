@@ -17,6 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     c_notice_title: 'Notice Title',
     publish_date: 'Publish Date',
+
+    request_title:'Request Title',
+    student_details:'Student Details',
+    status:'Status',
+    request_date:'Request Date',
+
+    inq_name: 'Name',
+    inq_email:'Email',
+    inq_date: 'Date'
   };
 
   let tableData = [];
@@ -165,6 +174,13 @@ document.addEventListener('DOMContentLoaded', function () {
         tableHtml += `
           <td>
             <a href="viewRequest.php?request_id=${row.id}&table=${tableName}" class="edit-link">View</a>
+          </td>`;
+        tableHtml += '</tr>';
+      }
+      if (tableName === 'inquiries') {
+        tableHtml += `
+          <td>
+            <a href="viewInq.php?inq_id=${row.id}&table=${tableName}" class="edit-link">View</a>
           </td>`;
         tableHtml += '</tr>';
       }

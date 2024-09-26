@@ -16,16 +16,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span class="m-icon">menu</span>
             </a>
             <a href="#" class="brand-logo">
-                <span>XYZ Name</span>
+                <span>Perennial</span>
             </a>
         </header>
         <nav class="dashboard-nav-list">
-
-            <!-- dashboard menu -->
-            <a href="./dashboard.php" class="dashboard-nav-item <?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>">
-                <span class="nav-m-icon">dashboard</span>
-                <span>Dashboard</span>
-            </a>
 
             <a href="./myProfile.php" class="dashboard-nav-item <?php echo $current_page == 'myProfile.php' ? 'active' : ''; ?>">
                 <span class="nav-m-icon">account_circle</span>

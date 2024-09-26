@@ -1,11 +1,653 @@
-@import url(./header.css);
-@import url(./fonts.css);
+@import url(fonts.css);
 
-* {
-    padding: 0;
+/* General Styles */
+body {
+    font-family: Rubik;
     margin: 0;
+    padding: 0;
+    background-color: #121212;
+    /* Dark background */
+    color: #e0e0e0;
+    /* Light text */
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    /* Ensure body takes full height */
+    display: flex;
+    flex-direction: column;
+    /* Use flexbox to position footer */
+    padding-top: 80px;
 }
 
-body{
-    background-color: rgb(66, 66, 66);
+/* Link Styles */
+a {
+    text-decoration: none;
+    color: #2196F3;
+    /* Link color */
 }
+
+a:hover {
+    color: #26829e;
+    /* Link hover color */
+}
+
+.page-header {
+    background-color: #0c0c0ca1;
+    backdrop-filter: blur(5px);
+    color: #e0e0e0;
+    padding: 20px 0;
+    /* Adjusted padding */
+    transition: background-color 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Nav Bar Links */
+.nav-bar {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-bar.active {
+    display: flex;
+    /* Show nav links when active */
+}
+
+.nav-bar a {
+    color: #e0e0e0;
+    /* Nav link color */
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: color 0.3s;
+}
+
+.nav-bar a:hover,
+.nav-bar .active {
+    color: #26829e;
+    /* Change to your desired hover/active color in dark mode */
+}
+
+/* Dropdown Styles */
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transition: background-color 0.3s;
+    right: 0;
+    /* Aligns the dropdown to the left side */
+}
+
+.dropdown-content a {
+    color: #e0e0e0;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    color: #26829e;
+    /* Change to your desired hover color */
+}
+
+.dropbtn:hover .dropdown-content {
+    display: block;
+    /* Show dropdown on hover */
+}
+
+/* Home Page Banner */
+.home-banner {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #1e1e1e;
+    /* Dark banner background */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.home-banner h1 {
+    font-size: 2.5rem;
+    color: #26829e;
+    /* Banner heading color */
+}
+
+.home-banner p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.about-us h1 {
+    color: #26829e;
+}
+
+/* Contact Us Section */
+
+/* Content Wrapper */
+.content {
+    padding: 20px;
+    /* Space around the content */
+}
+
+/* Contact Us Section - Dark Theme */
+.contact-us {
+    display: flex;
+    flex-direction: column;
+    /* Stack elements vertically */
+    gap: 10px;
+    /* Reduced space between elements */
+    max-width: 600px;
+    /* Limit width for better readability */
+    margin: auto;
+    /* Center the form */
+}
+
+.contact-us h1 {
+    color: #26829e;
+    font-size: 2rem;
+    /* Size for the heading */
+    margin-bottom: 5px;
+    /* Reduced space below heading */
+}
+
+.contact-us p {
+    font-size: 1rem;
+    /* Adjusted size for paragraph */
+    line-height: 1.5;
+    /* Reduced line height */
+    color: #e0e0e0;
+    /* Light text color */
+}
+
+.contact-us ul {
+    list-style: none;
+    /* Remove bullet points */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
+}
+
+.contact-us li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+
+    /* Reduced space between list items */
+    span {
+        margin-right: 5px;
+    }
+}
+
+.contact-us label {
+    color: #e0e0e0;
+    /* Light label text */
+    margin-bottom: 3px;
+    /* Reduced space below label */
+}
+
+.m-icon {
+    font-family: MaterialOutlined;
+    font-size: 1.5em;
+    color: #26829e;
+}
+
+.contact-us input,
+.contact-us textarea {
+    font-family: inherit;
+    width: 95%;
+    /* Full width for inputs */
+    background-color: #333;
+    /* Dark background for inputs */
+    color: #e0e0e0;
+    /* Light text in inputs */
+    border: none;
+    /* Dark border */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 8px;
+    /* Adjusted padding inside inputs */
+    font-size: 1rem;
+    /* Font size for inputs */
+    display: block;
+    /* Ensure inputs are block elements */
+    margin-bottom: 10px;
+    /* Reduced space below inputs */
+}
+
+.contact-us input:focus,
+.contact-us textarea:focus {
+    outline: none;
+}
+
+.contact-us input::placeholder,
+.contact-us textarea::placeholder {
+    color: #888;
+    /* Light placeholder text */
+}
+
+.contact-us textarea {
+    min-height: 120px;
+    overflow: auto;
+    /* Reduced height for the textarea */
+    resize: none;
+    /* Allow vertical resizing */
+}
+
+.contact-us button {
+    font: inherit;
+    padding: 8px 15px;
+    /* Adjusted padding for the button */
+    background-color: #26829e;
+    /* Blue background for button */
+    color: white;
+    /* White text for button */
+    border: none;
+    /* No border */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    font-size: 1rem;
+    /* Font size for button */
+    width: fit-content;
+    /* Fit button size to content */
+}
+
+.contact-us button:hover {
+    background-color: #245e70;
+    /* Darker blue on hover */
+}
+
+
+/* Footer Styles */
+footer {
+    background-color: #1e1e1e;
+    /* Dark footer background */
+    color: #e0e0e0;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    /* Push footer to the bottom */
+}
+
+/* Login Button Styles */
+.login-button {
+    background-color: #26829e;
+    /* Different background for login button */
+    color: #333 !important;
+    /* Button text color */
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.login-button:hover {
+    background-color: #2fa7cc;
+}
+
+/* Menu Toggle for Smaller Screens */
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-bar {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #1e1e1e;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    .nav-bar.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        background-color: #1e1e1e;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}
+
+/* Toggle Switch Styles */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* Start off-screen */
+    width: 250px;
+    /* Width of the sidebar */
+    height: 100%;
+    background-color: #1e1e1e;
+    /* Dark background */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    /* Shadow effect */
+    transition: right 0.3s;
+    /* Animation for sliding in/out */
+    z-index: 1000;
+    padding-top: 20px;
+}
+
+.sidebar.active {
+    right: 0;
+    /* Move into view */
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Space between sidebar items */
+    padding: 20px;
+    /* Padding inside sidebar */
+}
+
+.sidebar a {
+    color: #e0e0e0;
+    /* Link color */
+    text-decoration: none;
+    /* No underline */
+}
+
+/* Close button styles */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Nav Bar Links */
+.nav-bar {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-bar a {
+    color: #e0e0e0;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.nav-bar a:hover,
+.nav-bar .active {
+    color: #26829e;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    right: 0;
+}
+
+.dropdown-content a {
+    color: #e0e0e0;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    color: #26829e;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #1e1e1e;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s;
+    z-index: 1000;
+    padding-top: 20px;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+.sidebar a {
+    color: #e0e0e0;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #26829e;
+}
+
+/* Content Section */
+.content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Responsive for Smaller Screens */
+@media (max-width: 768px) {
+    .nav-bar {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        background-color: #1e1e1e;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}
+
+/* Input field styles */
+input[type="text"],
+input[type="email"],
+textarea {
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Autofill styles for Chrome and Safari */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    background-color: #333 !important;
+    /* Same background color */
+    color: #fff !important;
+    /* Same text color */
+}
+
+/* Autofill styles for Firefox */
+input:-moz-autofill,
+textarea:-moz-autofill {
+    background-color: #333 !important;
+    /* Same background color */
+    color: #fff !important;
+    /* Same text color */
+}
+
+/* Other existing styles remain unchanged */
+
+
+/* ------------------ */
+
+/* body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.page-header {
+    background-color: #007BFF;
+    color: white;
+}
+
+.nav-bar a {
+    color: white;
+}
+
+.nav-bar a:hover,
+.nav-bar .active {
+    color: #26829e;
+}
+
+.content {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.home-banner {
+    background-color: #e7f3ff;
+}
+
+.contact-us input,
+.contact-us textarea {
+    background-color: white;
+    color: black;
+    border-color: #ccc;
+}
+
+footer {
+    background-color: #007BFF;
+    color: white;
+}
+
+.login-button {
+    background-color: #26829e;
+    color: #333 !important;
+}
+
+.login-button:hover {
+    background-color: #26829e;
+} */
