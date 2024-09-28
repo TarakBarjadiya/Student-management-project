@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if the new passwords match
     if ($newPassword !== $confirmPassword) {
-        header('Location: forgotPassword.php?error=password_mismatch');
+        header('Location: resetPassword.php?error=password_mismatch');
         exit();
     }
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->affected_rows > 0) {
             echo "<script>alert('Password Changed Successfully!!'); window.location.href = 'login.php';</script>";
         } else {
-            echo "<script>alert('Invalid Credentials. Try Again!!'); window.location.href = 'forgotPassword.php';</script>";
+            echo "<script>alert('Invalid Credentials. Try Again!!'); window.location.href = 'resetPassword.php';</script>";
         }
     } else {
         // Error executing the query
