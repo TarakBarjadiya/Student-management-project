@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate fields to ensure they are not empty after trimming
     if (empty($name) || empty($email) || empty($message)) {
-        echo "All fields are required and cannot be empty or consist solely of spaces.";
+        echo "<script>alert('All fields are required and cannot be empty or consist solely of spaces.'); window.location.href = 'contact.php';</script>";
     } else {
         // Sanitize the input
         $name = $conn->real_escape_string($name);
@@ -21,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO inquiries (inq_name, inq_email, inq_msg, inq_date) VALUES ('$name', '$email', '$message', '$date')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Your message has been sent successfully.";
+            echo "<script>alert('Your message has been sent successfully.'); window.location.href = 'contact.php';</script>";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "<script>alert('Error sending message!! Please try again later.'); window.location.href = 'contact.php';</script>";
         }
     }
 }

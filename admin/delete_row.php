@@ -1,7 +1,12 @@
 <?php
+// Start with this line to ensure JSON response type
 header('Content-Type: application/json');
 
 include './includes/dbconnection.php';
+
+// Error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $id = $_GET['id'] ?? '';
 $table = $_GET['table'] ?? '';
@@ -36,11 +41,10 @@ $query = $conn->prepare("DELETE FROM $table WHERE id = ?");
 $query->bind_param('i', $id);
 
 if ($query->execute()) {
-    echo json_encode(['success' => true]);
+    echo json_encode(['success' => 'Class deleted successfully.']);
 } else {
-    echo json_encode(['error' => $query->error]);
+    echo json_encode(['error' => 'Error deleting class!']);
 }
 
 $query->close();
 $conn->close();
-?>

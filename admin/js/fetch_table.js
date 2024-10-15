@@ -435,22 +435,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
   addSearch();
   addPaginationEventListeners();
-
-  // Handle closing the modal with close button, cancel button, and escape key
-  document.querySelector('.close').addEventListener('click', () => {
-    document.getElementById('delete-modal').style.display = 'none';
-  });
-
-  document.getElementById('cancel-delete').addEventListener('click', () => {
-    document.getElementById('delete-modal').style.display = 'none';
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      const modal = document.getElementById('delete-modal');
-      if (modal.style.display === 'block') {
-        modal.style.display = 'none';
-      }
-    }
-  });
 });
